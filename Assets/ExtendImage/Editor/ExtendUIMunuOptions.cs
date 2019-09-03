@@ -35,6 +35,7 @@ namespace UnityEditor.UI
                 obj.name = nameof(ExtendImage);
                 Object.DestroyImmediate(obj.GetComponent<Image>());
                 var extendImg = obj.AddComponent<ExtendImage>();
+                extendImg.raycastTarget = false;
             }
         }
     }
