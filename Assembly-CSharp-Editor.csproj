@@ -60,7 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\ExtendImageEditor.cs" />
+    <Compile Include="Assets\ExtendImage\Editor\ExtendImageEditor.cs" />
+    <Compile Include="Assets\ExtendImage\Editor\ExtendUIMunuOptions.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>D:/repos/UIComponent_doupo/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>

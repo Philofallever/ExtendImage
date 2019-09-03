@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ExtendImage\ExtendImage.cs" />
+    <None Include="Assets\ExtendImage\Resources\ImageGrey.shader" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>D:/repos/UIComponent_doupo/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
