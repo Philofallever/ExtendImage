@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2018_4_8;UNITY_2018_4;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_VSTU;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2018_4_8;UNITY_2018_4;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_VSTU;ODIN_INSPECTOR;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -61,9 +61,72 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ExtendImage\ExtendImage.cs" />
+    <Compile Include="Assets\ExtendText\ExtendText\LanguageCfg.cs" />
+    <Compile Include="Assets\ExtendText\Localization.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\AlphaDraw.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\AlphaEffect.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\AlphaOffsetDraw.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\Around.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\Cartoon.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\CartoonDraw.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\ColorConst.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\DelayDestory.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\Draw.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\DrawFactory.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\DrawObject.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\DrawStruct.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\Effect.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\EffectDrawObject.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\ElementSegment.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\FontCache.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\Line.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\ListPool.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\ObjectExtension.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\ObjectPool.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\OffsetDraw.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\OffsetEffect.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\OutlineDraw.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\Owner.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\Pool.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\RenderObject.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\SpriteMaterial.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\TagAttributes.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\Tools.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\Common\Tweener.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\CartoonNode.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\ExternalNode.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\HyperlinkNode.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\LineNode.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RectNode.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RectSpriteNode.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RenderCache.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RenderCache_CartoonData.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RenderCache_SpriteData.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RenderCache_TextData.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RenderNodeBase.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\SetPosNode.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\SpriteNode.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\TextNode.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\TextRender.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\TypePosition.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\XSpaceNode.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\YSpaceNode.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\SymbolLabel.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\SymbolText.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\SymbolTextEvent.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\SymbolTextImp.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\SymbolTextInit.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\SymbolTextOwner.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\TextParser\TextParser.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\TextParser\TextParser_FunChar.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\TextParser\TextParser_Hy.cs" />
+    <Compile Include="Assets\ExtendText\SymbolText\TextParser\TextParser_Tag.cs" />
     <None Include="Assets\ExtendImage\Resources\ImageGrey.shader" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>D:/repos/UIComponent_doupo/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AssetBundleBrowser.Editor">
+      <HintPath>D:/repos/UIComponent_doupo/Library/ScriptAssemblies/Unity.AssetBundleBrowser.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -265,6 +328,24 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Serialization">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Utilities">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Utilities.Editor">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Editor">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Attributes">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Serialization.Config">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -611,6 +692,12 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{F6B06567-E257-963C-2E6F-B9D035CAD154}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

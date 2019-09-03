@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
+using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
@@ -37,6 +39,22 @@ namespace UnityEditor.UI
                 var extendImg = obj.AddComponent<ExtendImage>();
                 extendImg.raycastTarget = false;
             }
+        }
+
+        [MenuItem("ExtendUI/LanguageCfg",false)]
+        internal static void LoadLangugageCfg()
+        {
+            var type = typeof(LanguageCfgs);
+            var path = $"Assets/ExtendText/Resources/{type.Name}.asset";
+            if (!File.Exists(path))
+            {
+                var obj = ScriptableObject.CreateInstance<LanguageCfgs>();
+                AssetDatabase.CreateAsset(obj,path);
+                AssetDatabase.Refresh();
+            }
+
+            var asset = AssetDatabase.LoadAssetAtPath<LanguageCfgs>(path);
+            AssetDatabase.OpenAsset(asset);
         }
     }
 }

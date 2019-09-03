@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{6D2F2393-3912-FD01-4159-A0EA499B03A7}</ProjectGuid>
+    <ProjectGuid>{3B5A4DA9-0C7D-0906-3E1F-113D7B96164E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor-firstpass</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectType>Editor:5</UnityProjectType>
+    <UnityProjectType>EditorPlugins:7</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2018.4.8f1</UnityVersion>
   </PropertyGroup>
@@ -60,13 +60,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ExtendImage\Editor\ExtendImageEditor.cs" />
-    <Compile Include="Assets\ExtendImage\Editor\ExtendUIMunuOptions.cs" />
-    <Compile Include="Assets\ExtendText\ExtendText\Editor\MenuOptions.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Editor\CreateAnim.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Editor\MenuOptions.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Editor\SymbolLabelEditor.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Editor\SymbolTextEditor.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\AssemblyImportSettingsAutomation.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\BuildAOTAutomation.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\EnsureOdinInspectorDefine.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\FixBrokenUnityObjectWrapperDrawer.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\SyncListDrawer.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\SyncVarAttributeDrawer.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\Vector2IntMinMaxAttributeDrawer.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\VectorIntDrawers.cs" />
+    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\VectorIntPropertyResolvers.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>D:/repos/UIComponent_doupo/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
@@ -684,14 +686,6 @@
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{F6B06567-E257-963C-2E6F-B9D035CAD154}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{47986F12-2F79-B3B1-0E3A-2FCB612D46A2}</Project>
-      <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
-      <Project>{3B5A4DA9-0C7D-0906-3E1F-113D7B96164E}</Project>
-      <Name>Assembly-CSharp-Editor-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
