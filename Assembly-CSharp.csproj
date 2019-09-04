@@ -60,68 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ExtendImage\ExtendImage.cs" />
-    <Compile Include="Assets\ExtendText\ExtendText\LanguageCfg.cs" />
-    <Compile Include="Assets\ExtendText\Localization.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\AlphaDraw.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\AlphaEffect.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\AlphaOffsetDraw.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\Around.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\Cartoon.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\CartoonDraw.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\ColorConst.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\DelayDestory.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\Draw.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\DrawFactory.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\DrawObject.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\DrawStruct.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\Effect.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\EffectDrawObject.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\ElementSegment.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\FontCache.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\Line.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\ListPool.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\ObjectExtension.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\ObjectPool.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\OffsetDraw.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\OffsetEffect.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\OutlineDraw.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\Owner.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\Pool.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\RenderObject.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\SpriteMaterial.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\TagAttributes.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\Tools.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Common\Tweener.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\CartoonNode.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\ExternalNode.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\HyperlinkNode.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\LineNode.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RectNode.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RectSpriteNode.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RenderCache.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RenderCache_CartoonData.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RenderCache_SpriteData.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RenderCache_TextData.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\RenderNodeBase.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\SetPosNode.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\SpriteNode.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\TextNode.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\TextRender.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\TypePosition.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\XSpaceNode.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\RenderNode\YSpaceNode.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\SymbolLabel.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\SymbolText.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\SymbolTextEvent.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\SymbolTextImp.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\SymbolTextInit.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\SymbolTextOwner.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\TextParser\TextParser.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\TextParser\TextParser_FunChar.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\TextParser\TextParser_Hy.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\TextParser\TextParser_Tag.cs" />
-    <None Include="Assets\ExtendImage\Resources\ImageGrey.shader" />
+    <Compile Include="Assets\LoopList\Item1Script.cs" />
+    <Compile Include="Assets\LoopList\LoopList1.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>D:/repos/UIComponent_doupo/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
@@ -329,6 +269,15 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Sirenix.OdinInspector.Attributes">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Editor">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Serialization.Config">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.dll</HintPath>
+    </Reference>
     <Reference Include="Sirenix.Serialization">
       <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.dll</HintPath>
     </Reference>
@@ -337,15 +286,6 @@
     </Reference>
     <Reference Include="Sirenix.Utilities.Editor">
       <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.OdinInspector.Editor">
-      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.OdinInspector.Attributes">
-      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Serialization.Config">
-      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

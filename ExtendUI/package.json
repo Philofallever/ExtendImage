@@ -1,0 +1,8 @@
+{
+	"name": "com.blz.blz-extend-ugui",
+	"displayName": "UGUI ExtendUI",
+	"version": "1.0.0",
+	"unity": "2018.4",
+	"description": "UGUI UI组件扩展包",
+	"dependencies": {}
+}

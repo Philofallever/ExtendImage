@@ -60,13 +60,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ExtendImage\Editor\ExtendImageEditor.cs" />
-    <Compile Include="Assets\ExtendImage\Editor\ExtendUIMunuOptions.cs" />
-    <Compile Include="Assets\ExtendText\ExtendText\Editor\MenuOptions.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Editor\CreateAnim.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Editor\MenuOptions.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Editor\SymbolLabelEditor.cs" />
-    <Compile Include="Assets\ExtendText\SymbolText\Editor\SymbolTextEditor.cs" />
+    <Compile Include="Assets\ExtendUI\ExtendImage\Editor\ExtendImageEditor.cs" />
+    <Compile Include="Assets\ExtendUI\ExtendImage\Editor\ExtendUIMunuOptions.cs" />
+    <Compile Include="Assets\ExtendUI\ExtendText\ExtendText\Editor\MenuOptions.cs" />
+    <Compile Include="Assets\ExtendUI\ExtendText\SymbolText\Editor\CreateAnim.cs" />
+    <Compile Include="Assets\ExtendUI\ExtendText\SymbolText\Editor\SymbolLabelEditor.cs" />
+    <Compile Include="Assets\ExtendUI\ExtendText\SymbolText\Editor\SymbolTextEditor.cs" />
+    <Compile Include="Assets\ExtendUI\SuperScrollView\Editor\LoopGridViewEditor.cs" />
+    <Compile Include="Assets\ExtendUI\SuperScrollView\Editor\LoopListViewEditor2.cs" />
+    <Compile Include="Assets\ExtendUI\SuperScrollView\Editor\LoopStaggeredGridViewEditor.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>D:/repos/UIComponent_doupo/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
@@ -307,6 +309,15 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="Sirenix.OdinInspector.Attributes">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Editor">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Serialization.Config">
+      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.dll</HintPath>
+    </Reference>
     <Reference Include="Sirenix.Serialization">
       <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.dll</HintPath>
     </Reference>
@@ -315,15 +326,6 @@
     </Reference>
     <Reference Include="Sirenix.Utilities.Editor">
       <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.OdinInspector.Editor">
-      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.OdinInspector.Attributes">
-      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Serialization.Config">
-      <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
