@@ -1,6 +1,6 @@
 ﻿﻿using UnityEngine;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     public class AlphaEffect : IEffect
     {

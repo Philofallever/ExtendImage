@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     [System.Serializable]
     public class Cartoon

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     internal class ObjectPool<T> where T : new()
     {

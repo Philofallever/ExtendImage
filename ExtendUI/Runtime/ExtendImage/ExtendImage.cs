@@ -1,6 +1,10 @@
-﻿using UnityEngine.Sprites;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Sprites;
+using UnityEngine.U2D;
+using UnityEngine.UI;
 
-namespace UnityEngine.UI
+namespace ExtendUI
 {
     [AddComponentMenu("UI/ExtendImage")]
     public class ExtendImage : Image
@@ -45,6 +49,21 @@ namespace UnityEngine.UI
         private Mirror m_Mirror = Mirror.None; // 镜像模式
 
         #region 重载部分
+        // TODO LOCALIZE
+        protected override void Awake()
+        {
+            base.Awake();
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+        }
 
         protected override void OnPopulateMesh(VertexHelper vh)
         {
@@ -135,6 +154,11 @@ namespace UnityEngine.UI
             base.OnValidate();
         }
 #endif
+        // TODO 
+        // public void Localize(Sprite localSprite)
+        // {
+        //    sprite = localSprite;
+        // }
 
         #endregion
 

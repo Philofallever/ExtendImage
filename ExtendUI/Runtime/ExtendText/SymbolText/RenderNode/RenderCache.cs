@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     // 缓存渲染元素
     public partial class RenderCache

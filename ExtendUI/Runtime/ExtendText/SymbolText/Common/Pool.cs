@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Collections.Generic;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     internal class PoolData<T> where T : new()
     {

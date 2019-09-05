@@ -2,7 +2,7 @@
 using System.Text;
 using UnityEngine;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     public class TagAttributes
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     public class DelayDestory : MonoBehaviour
     {

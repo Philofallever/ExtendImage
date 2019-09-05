@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     static public partial class Tools
     {

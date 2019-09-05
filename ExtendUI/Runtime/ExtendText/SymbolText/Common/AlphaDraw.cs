@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     [ExecuteInEditMode]
     public class AlphaDraw : EffectDrawObjec

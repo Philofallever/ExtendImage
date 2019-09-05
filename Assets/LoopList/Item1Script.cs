@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using SuperScrollView;
+using ExtendUI.SuperScrollView;
 using UnityEngine;
 using UnityEngine.UI;
 

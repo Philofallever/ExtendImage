@@ -3,7 +3,7 @@ using UnityEditor.UI;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
 
     [CanEditMultipleObjects]

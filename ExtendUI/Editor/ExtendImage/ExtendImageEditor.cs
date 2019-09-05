@@ -1,7 +1,9 @@
-﻿using UnityEditor.AnimatedValues;
+﻿using UnityEditor;
+using UnityEditor.AnimatedValues;
+using UnityEditor.UI;
 using UnityEngine.UI;
 
-namespace UnityEditor.UI
+namespace ExtendUI
 {
     [CustomEditor(typeof(ExtendImage), true), CanEditMultipleObjects]
     public class ExtendImageEditor : ImageEditor

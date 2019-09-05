@@ -1,16 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using ExtendUI;
+using ExtendUI.SymbolText;
 using UnityEngine;
 using UnityEngine.UI;
-using WXB;
 using Object = UnityEngine.Object;
 
 namespace UnityEditor.UI
 {
     internal static class ExtendUIMunuOptions
     {
-        private static Type _menuOptions;
+        private static          Type   _menuOptions;
+        private static readonly string _packageRoot = @"Packages/com.blz.extend-ui";
 
         private static Type MenuOptions
         {
@@ -42,7 +44,7 @@ namespace UnityEditor.UI
             }
         }
 
-        [MenuItem("GameObject/UI/SymbolText",false,2001)]
+        [MenuItem("GameObject/UI/SymbolText", false, 2001)]
         private static void AddSymbolText(MenuCommand menuCommand)
         {
             var addText = MenuOptions?.GetMethod("AddText", BindingFlags.Public | BindingFlags.Static);
@@ -53,41 +55,36 @@ namespace UnityEditor.UI
                 obj.name = nameof(SymbolText);
                 Object.DestroyImmediate(obj.GetComponent<Text>());
                 var symbolText = obj.AddComponent<SymbolText>();
-                symbolText.fontSize = 36;
+                symbolText.fontSize        = 36;
                 symbolText.supportRichText = false;
             }
         }
 
-        [MenuItem("ExtendUI/LanguageCfg",false)]
-        private static void LoadLangugageCfg()
+        private static void Load<T>() where T : ScriptableObject
         {
-            var type = typeof(LanguageCfgs);
-            var path = $"Assets/ExtendText/Resources/{type.Name}.asset";
+            var type = typeof(T);
+            var path = $"{_packageRoot}/Resources/{type.Name}.asset";
             if (!File.Exists(path))
             {
-                var obj = ScriptableObject.CreateInstance<LanguageCfgs>();
-                AssetDatabase.CreateAsset(obj,path);
-                AssetDatabase.Refresh();
-            }
-
-            var asset = AssetDatabase.LoadAssetAtPath<LanguageCfgs>(path);
-            AssetDatabase.OpenAsset(asset);
-        }
-
-        [MenuItem("ExtendUI/SymbolTextCfg", false)]
-        private static void LoadSymbolTextCfg()
-        {
-            var type = typeof(SymbolTextCfg);
-            var path = $"Assets/ExtendText/Resources/{type.Name}.asset";
-            if (!File.Exists(path))
-            {
-                var obj = ScriptableObject.CreateInstance<SymbolTextCfg>();
+                var obj = ScriptableObject.CreateInstance<T>();
                 AssetDatabase.CreateAsset(obj, path);
                 AssetDatabase.Refresh();
             }
 
-            var asset = AssetDatabase.LoadAssetAtPath<SymbolTextCfg>(path);
+            var asset = AssetDatabase.LoadAssetAtPath<T>(path);
             AssetDatabase.OpenAsset(asset);
+        }
+
+        [MenuItem("ExtendUI/语言配置", false)]
+        private static void LoadLangugageCfg()
+        {
+            Load<LanguageCfgs>();
+        }
+
+        [MenuItem("ExtendUI/富文本表情配置", false)]
+        private static void LoadSymbolTextCfg()
+        {
+            Load<SymbolTextCfg>();
         }
 
 
@@ -192,6 +189,5 @@ namespace UnityEditor.UI
             EditorUtility.SetDirty(sti);
         }
          */
-
     }
 }

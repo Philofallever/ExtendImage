@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using SuperScrollView;
+using ExtendUI.SuperScrollView;
 using UnityEngine.UI;
 
 public class LoopList1 : MonoBehaviour

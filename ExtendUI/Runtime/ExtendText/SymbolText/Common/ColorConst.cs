@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     public static class ColorConst
     {

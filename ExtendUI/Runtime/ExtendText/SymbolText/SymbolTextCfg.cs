@@ -1,10 +1,9 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using Sirenix.OdinInspector;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
-    public class SymbolTextCfg : SerializedScriptableObject
+    public class SymbolTextCfg : ScriptableObject
     {
         static Dictionary<string, Font>    Fonts;    // 当前所有的字库
         static Dictionary<string, Sprite>  Sprites;  // 当前所有的精灵
@@ -13,7 +12,7 @@ namespace WXB
         //[SerializeField]
         Font[] fonts = null;
 
-        [SerializeField]
+        //[SerializeField]
         Sprite[] sprites = null;
 
         [SerializeField]

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SuperScrollView
+namespace ExtendUI.SuperScrollView
 {
 
     public enum SnapStatus

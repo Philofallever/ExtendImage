@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     [ExecuteInEditMode]
     public class CartoonDraw : EffectDrawObjec, ICanvasElement

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Text;
 using System.Collections.Generic;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     static class SpriteMaterial
     {

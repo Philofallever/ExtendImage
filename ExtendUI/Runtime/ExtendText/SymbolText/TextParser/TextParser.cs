@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 // 文本解析
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     public enum Anchor
     {

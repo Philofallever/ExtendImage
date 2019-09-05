@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SuperScrollView
+namespace ExtendUI.SuperScrollView
 {
 
     public class LoopListViewItem2 : MonoBehaviour

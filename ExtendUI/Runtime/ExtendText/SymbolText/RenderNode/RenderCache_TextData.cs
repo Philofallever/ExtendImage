@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 #pragma warning disable 618
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     // 缓存渲染元素
     public partial class RenderCache

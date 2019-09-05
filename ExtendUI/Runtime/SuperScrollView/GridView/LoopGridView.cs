@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-namespace SuperScrollView
+namespace ExtendUI.SuperScrollView
 {
    
     [System.Serializable]

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     public static class FontCache
     {

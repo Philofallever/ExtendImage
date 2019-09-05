@@ -3,7 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     public partial class TextNode : NodeBase
 	{

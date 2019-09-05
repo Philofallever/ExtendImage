@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     [RequireComponent(typeof(SymbolText))]
     public class SymbolTextEvent : MonoBehaviour, /*IPointerEnterHandler, IPointerExitHandler,*/ IPointerDownHandler, IPointerUpHandler

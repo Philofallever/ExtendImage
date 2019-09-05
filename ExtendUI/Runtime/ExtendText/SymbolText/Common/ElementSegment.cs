@@ -2,7 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     // 一句语句，可能会分多行显示，此接口为分割字符串的接口，把希望在同一行显示的部分组合成一个Element
     public interface ElementSegment

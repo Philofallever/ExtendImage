@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     public class DrawStruct
     {

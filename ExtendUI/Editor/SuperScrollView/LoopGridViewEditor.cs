@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEditorInternal;
 
 
-namespace SuperScrollView
+namespace ExtendUI.SuperScrollView
 {
 
     [CustomEditor(typeof(LoopGridView))]

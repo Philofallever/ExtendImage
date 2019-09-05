@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     [RequireComponent(typeof(RectTransform))]
     [AddComponentMenu("UI/SymbolText")]
-    public partial class SymbolText : Text, Owner
+    public partial class SymbolText : Text, Owner,ILocalizableText
     {
         static SymbolText()
         {
@@ -211,7 +211,7 @@ namespace WXB
         {
             mRenderCache = new RenderCache(this);
             base.Awake();
-
+            font = Localization.CurrLangCfg.Font;
             m_textDirty = true;
             m_renderNodeDirty = true;
 
@@ -242,6 +242,8 @@ namespace WXB
 
         [SerializeField]
         bool m_isCheckFontY = false;
+
+        private ILocalizableText _ilocalizableTextImplementation;
 
         public bool isCheckFontY
         {
@@ -364,6 +366,7 @@ namespace WXB
         {
             base.OnEnable();
             ActiveList.Add(this);
+            Localization.Register(this);
         }
 
         protected override void OnDisable()
@@ -371,6 +374,7 @@ namespace WXB
             base.OnDisable();
             FreeDraws();
             ActiveList.Remove(this);
+            Localization.Ungister(this);
         }
 
         protected override void OnDestroy()
@@ -388,6 +392,11 @@ namespace WXB
             float deltaTime = Time.deltaTime;
             for (int i = 0; i < m_UsedDraws.Count; ++i)
                 m_UsedDraws[i].UpdateSelf(deltaTime);
+        }
+
+        public void Localize(Font localFont)
+        {
+            font = localFont;
         }
     }
 }

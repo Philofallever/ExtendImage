@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 文本解析
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     public partial class TextParser
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     public static class ObjectExtension
     {

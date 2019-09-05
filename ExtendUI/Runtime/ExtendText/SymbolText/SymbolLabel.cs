@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     [RequireComponent(typeof(RectTransform))]
     [AddComponentMenu("UI/SymbolLabel")]

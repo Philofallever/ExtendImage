@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-namespace WXB
+namespace ExtendUI.SymbolText
 {
     [RequireComponent(typeof(RectTransform))]
     [RequireComponent(typeof(CanvasRenderer))]
