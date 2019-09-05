@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3B5A4DA9-0C7D-0906-3E1F-113D7B96164E}</ProjectGuid>
+    <ProjectGuid>{E3FEDFC6-6D1B-303D-9897-08D78EF1CD76}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp-Editor-firstpass</AssemblyName>
+    <AssemblyName>Unity.ExtendUI.Editor</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectType>EditorPlugins:7</UnityProjectType>
+    <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2018.4.8f1</UnityVersion>
   </PropertyGroup>
@@ -60,21 +60,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\AssemblyImportSettingsAutomation.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\BuildAOTAutomation.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\EnsureOdinInspectorDefine.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\FixBrokenUnityObjectWrapperDrawer.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\SyncListDrawer.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\SyncVarAttributeDrawer.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\Vector2IntMinMaxAttributeDrawer.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\VectorIntDrawers.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\Editor\VectorIntPropertyResolvers.cs" />
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/repos/UIComponent_doupo/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.AssetBundleBrowser.Editor">
-      <HintPath>D:/repos/UIComponent_doupo/Library/ScriptAssemblies/Unity.AssetBundleBrowser.Editor.dll</HintPath>
-    </Reference>
+    <Compile Include="ExtendUI\Editor\ExtendImage\ExtendImageEditor.cs" />
+    <Compile Include="ExtendUI\Editor\ExtendText\SymbolText\SymbolLabelEditor.cs" />
+    <Compile Include="ExtendUI\Editor\ExtendText\SymbolText\SymbolTextEditor.cs" />
+    <Compile Include="ExtendUI\Editor\ExtendUIMunuOptions.cs" />
+    <Compile Include="ExtendUI\Editor\SuperScrollView\LoopGridViewEditor.cs" />
+    <Compile Include="ExtendUI\Editor\SuperScrollView\LoopListViewEditor2.cs" />
+    <Compile Include="ExtendUI\Editor\SuperScrollView\LoopStaggeredGridViewEditor.cs" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -683,14 +675,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{F6B06567-E257-963C-2E6F-B9D035CAD154}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ExtendUI.Editor.csproj">
-      <Project>{E3FEDFC6-6D1B-303D-9897-08D78EF1CD76}</Project>
-      <Name>Unity.ExtendUI.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.ExtendUI.csproj">
       <Project>{188AB833-11EE-D0FB-ABD6-85F2AE647901}</Project>
       <Name>Unity.ExtendUI</Name>

@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F6B06567-E257-963C-2E6F-B9D035CAD154}</ProjectGuid>
+    <ProjectGuid>{188AB833-11EE-D0FB-ABD6-85F2AE647901}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
+    <AssemblyName>Unity.ExtendUI</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectType>GamePlugins:3</UnityProjectType>
+    <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2018.4.8f1</UnityVersion>
   </PropertyGroup>
@@ -60,21 +60,85 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\SerializedNetworkBehaviour.cs" />
-    <Compile Include="Assets\Plugins\Sirenix\Odin Inspector\Scripts\VectorIntFormatters.cs" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.xml" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.xml" />
-    <None Include="Assets\Plugins\Sirenix\Readme.txt" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\link.xml" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.xml" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.xml" />
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/repos/UIComponent_doupo/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.AssetBundleBrowser.Editor">
-      <HintPath>D:/repos/UIComponent_doupo/Library/ScriptAssemblies/Unity.AssetBundleBrowser.Editor.dll</HintPath>
-    </Reference>
+    <Compile Include="ExtendUI\Runtime\ExtendImage\ExtendImage.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\LanguageCfg.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\Localization.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\AlphaDraw.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\AlphaEffect.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\AlphaOffsetDraw.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\Around.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\Cartoon.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\CartoonDraw.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\ColorConst.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\DelayDestory.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\Draw.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\DrawFactory.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\DrawObject.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\DrawStruct.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\Effect.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\EffectDrawObject.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\ElementSegment.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\FontCache.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\Line.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\ListPool.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\ObjectExtension.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\ObjectPool.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\OffsetDraw.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\OffsetEffect.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\OutlineDraw.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\Owner.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\Pool.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\RenderObject.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\SpriteMaterial.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\TagAttributes.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\Tools.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\Common\Tweener.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\CartoonNode.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\ExternalNode.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\HyperlinkNode.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\LineNode.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\RectNode.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\RectSpriteNode.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\RenderCache.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\RenderCache_CartoonData.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\RenderCache_SpriteData.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\RenderCache_TextData.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\RenderNodeBase.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\SetPosNode.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\SpriteNode.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\TextNode.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\TextRender.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\TypePosition.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\XSpaceNode.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\RenderNode\YSpaceNode.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\SymbolLabel.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\SymbolText.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\SymbolTextCfg.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\SymbolTextEvent.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\SymbolTextImp.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\SymbolTextInit.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\SymbolTextOwner.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\TestLink.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\TextParser\TextParser.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\TextParser\TextParser_FunChar.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\TextParser\TextParser_Hy.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\TextParser\TextParser_Tag.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\Common\ClickEventListener.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\Common\CommonDefine.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\Common\ItemPosMgr.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\GridView\GridItemGroup.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\GridView\LoopGridItemPool.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\GridView\LoopGridView.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\GridView\LoopGridViewItem.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\ListView\LoopListItemPool.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\ListView\LoopListView2.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\ListView\LoopListViewItem2.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\StaggeredGridView\LoopStaggeredGridView.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\StaggeredGridView\LoopStaggeredGridViewItem.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\StaggeredGridView\StaggeredGridItemGroup.cs" />
+    <Compile Include="ExtendUI\Runtime\SuperScrollView\StaggeredGridView\StaggeredGridItemPool.cs" />
+    <None Include="ExtendUI\Runtime\SuperScrollView\Version 2.4.0.txt" />
+    <None Include="ExtendUI\Runtime\ExtendImage\ImageGrey.shader" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -258,6 +322,12 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.TestRunner">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
@@ -267,14 +337,38 @@
     <Reference Include="UnityEngine.Timeline">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Timeline">
+      <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.GoogleAudioSpatializer">
+      <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.GoogleAudioSpatializer">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.SpatialTracking">
+      <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.VR">
+      <HintPath>D:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>D:/Program Files/Unity2018/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>D:/Program Files/Unity2018/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="Sirenix.OdinInspector.Attributes">
       <HintPath>D:/repos/UIComponent_doupo/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.dll</HintPath>
@@ -639,16 +733,6 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Unity.ExtendUI.Editor.csproj">
-      <Project>{E3FEDFC6-6D1B-303D-9897-08D78EF1CD76}</Project>
-      <Name>Unity.ExtendUI.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ExtendUI.csproj">
-      <Project>{188AB833-11EE-D0FB-ABD6-85F2AE647901}</Project>
-      <Name>Unity.ExtendUI</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
