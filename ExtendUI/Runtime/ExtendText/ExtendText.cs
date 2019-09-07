@@ -8,7 +8,7 @@ namespace ExtendUI
         protected override void Awake()
         {
             base.Awake();
-            font = Localization.CurrLangCfg.Font;
+            font = Localization.CurrLangCfg.Font??font;
         }
 
         protected override void OnEnable()

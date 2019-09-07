@@ -44,6 +44,23 @@ namespace UnityEditor.UI
             }
         }
 
+        [MenuItem("GameObject/UI/ExtendText", false, 2001)]
+        private static void AddExtendText(MenuCommand menuCommand)
+        {
+            var addText = MenuOptions?.GetMethod("AddText", BindingFlags.Public | BindingFlags.Static);
+            if (addText != null)
+            {
+                addText.Invoke(null, new object[] {menuCommand});
+                var obj = Selection.activeGameObject;
+                obj.name = nameof(ExtendText);
+                Object.DestroyImmediate(obj.GetComponent<Text>());
+                var extendText = obj.AddComponent<ExtendText>();
+                extendText.fontSize        = 36;
+                extendText.supportRichText = false;
+                extendText.raycastTarget   = false;
+            }
+        }
+
         [MenuItem("GameObject/UI/SymbolText", false, 2001)]
         private static void AddSymbolText(MenuCommand menuCommand)
         {

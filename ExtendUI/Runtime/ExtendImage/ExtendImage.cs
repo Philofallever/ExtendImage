@@ -24,6 +24,19 @@ namespace ExtendUI
             }
         }
 
+        public bool Grey
+        {
+            get => m_Grey;
+            set
+            {
+                if (m_Grey == value)
+                    return;
+
+                m_Grey = value;
+                SetMaterialDirty();
+            }
+        }
+
         /// <summary>
         ///  Image的Type为Simple时,镜像可选模式
         /// </summary>
