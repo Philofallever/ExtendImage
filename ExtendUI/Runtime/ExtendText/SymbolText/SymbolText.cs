@@ -211,7 +211,7 @@ namespace ExtendUI.SymbolText
         {
             mRenderCache = new RenderCache(this);
             base.Awake();
-            if(Localization.CurrLangCfg.Font !=null)
+            if (Localization.CurrLangCfg.Font)
                 font = Localization.CurrLangCfg.Font;
             m_textDirty = true;
             m_renderNodeDirty = true;
@@ -397,7 +397,7 @@ namespace ExtendUI.SymbolText
 
         public void Localize(Font localFont)
         {
-            if(localFont !=null)
+            if(localFont)
                 font = localFont;
         }
     }

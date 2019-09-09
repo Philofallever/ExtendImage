@@ -8,7 +8,8 @@ namespace ExtendUI
         protected override void Awake()
         {
             base.Awake();
-            font = Localization.CurrLangCfg.Font??font;
+            if (Localization.CurrLangCfg.Font)
+                font = Localization.CurrLangCfg.Font;
         }
 
         protected override void OnEnable()
@@ -20,12 +21,13 @@ namespace ExtendUI
         protected override void OnDisable()
         {
             base.OnDisable();
-           Localization.Ungister(this);
+            Localization.Ungister(this);
         }
 
         public void Localize(Font localFont)
         {
-            font = localFont;
+            if(localFont)
+                font = localFont;
         }
     }
 }
