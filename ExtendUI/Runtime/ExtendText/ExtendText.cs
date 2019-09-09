@@ -3,31 +3,28 @@ using UnityEngine.UI;
 
 namespace ExtendUI
 {
-    public class ExtendText : Text,ILocalizableText
+    /// <summary>
+    /// 支持本地化的文本
+    /// </summary>
+    public class ExtendText : Text,ILocalizable
     {
         protected override void Awake()
         {
             base.Awake();
-            if (Localization.CurrLangCfg.Font)
-                font = Localization.CurrLangCfg.Font;
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
+            Localize();
             Localization.Register(this);
         }
 
-        protected override void OnDisable()
+        protected override void OnDestroy()
         {
-            base.OnDisable();
-            Localization.Ungister(this);
+            base.OnDestroy();
+            Localization.UnRegister(this);
         }
 
-        public void Localize(Font localFont)
+        public void Localize()
         {
-            if(localFont)
-                font = localFont;
+            if (Localization.CurrFont != null && font != Localization.CurrFont)
+                font = Localization.CurrFont;
         }
     }
 }

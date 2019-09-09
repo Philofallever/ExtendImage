@@ -92,18 +92,11 @@ namespace UnityEditor.UI
             AssetDatabase.OpenAsset(asset);
         }
 
-        [MenuItem("ExtendUI/语言配置", false)]
-        private static void LoadLangugageCfg()
-        {
-            Load<LanguageCfgs>();
-        }
-
         [MenuItem("ExtendUI/富文本表情配置", false)]
         private static void LoadSymbolTextCfg()
         {
             Load<SymbolTextCfg>();
         }
-
 
         /* 富文本表情
         [MenuItem("ExtendUI/CheckFileName",false)]

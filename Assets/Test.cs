@@ -17,7 +17,6 @@ public class Test : MonoBehaviour
     {
         if (GUI.Button(new Rect(10, 10, 100, 50), "切换语言", GUI.skin.button))
         {
-            Localization.ChangeLanguage(Localization.CurrLangCfg.Lang == SystemLanguage.English ? SystemLanguage.ChineseSimplified : SystemLanguage.English);
         }
 
     }

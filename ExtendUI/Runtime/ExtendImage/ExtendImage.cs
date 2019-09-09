@@ -1,16 +1,17 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Sprites;
-using UnityEngine.U2D;
 using UnityEngine.UI;
 
 namespace ExtendUI
 {
     [AddComponentMenu("UI/ExtendImage")]
-    public class ExtendImage : Image
+    public class ExtendImage : Image, ILocalizable
     {
         [SerializeField]
-        private bool m_Grey = false;
+        private bool m_Grey;
+
+        [SerializeField]
+        private bool m_Localiable = false;
 
         private static Material m_GreyMaterial; // 灰色材质
 
@@ -62,20 +63,22 @@ namespace ExtendUI
         private Mirror m_Mirror = Mirror.None; // 镜像模式
 
         #region 重载部分
-        // TODO LOCALIZE
+
         protected override void Awake()
         {
             base.Awake();
+            if (m_Localiable)
+            {
+                Localize();
+                Localization.Register(this);
+            }
         }
 
-        protected override void OnEnable()
+        protected override void OnDestroy()
         {
-            base.OnEnable();
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
+            base.OnDestroy();
+            if (m_Localiable)
+                Localization.UnRegister(this);
         }
 
         protected override void OnPopulateMesh(VertexHelper vh)
@@ -228,5 +231,11 @@ namespace ExtendUI
         }
 
         #endregion
+
+        public void Localize()
+        {
+            var localSprite = Localization.LocalizeSprite(sprite);
+            sprite = localSprite;
+        }
     }
 }

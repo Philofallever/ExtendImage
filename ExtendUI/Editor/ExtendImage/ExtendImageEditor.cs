@@ -15,6 +15,7 @@ namespace ExtendUI
 
         private SerializedProperty m_Mirror;
         private SerializedProperty m_Grey;
+        private SerializedProperty m_Localiable;
         private AnimBool           m_ShowImgType;
 
         protected override void OnEnable()
@@ -25,6 +26,7 @@ namespace ExtendUI
             m_UseSpriteMesh  = serializedObject.FindProperty("m_UseSpriteMesh");
             m_Mirror         = serializedObject.FindProperty("m_Mirror");
             m_Grey           = serializedObject.FindProperty("m_Grey");
+            m_Localiable     = serializedObject.FindProperty("m_Localiable");
 
             m_ShowImgType = new AnimBool(m_Sprite.objectReferenceValue != null);
             base.OnEnable();
@@ -33,9 +35,10 @@ namespace ExtendUI
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            EditorGUILayout.HelpBox("图片置灰及simple模式图片镜像", MessageType.Info, true);
+            EditorGUILayout.HelpBox("图片置灰、本地化及simple模式图片镜像", MessageType.Info, true);
             SpriteGUI();
             AppearanceControlsGUI();
+            EditorGUILayout.PropertyField(m_Localiable);
             EditorGUILayout.PropertyField(m_Grey);
             RaycastControlsGUI();
 

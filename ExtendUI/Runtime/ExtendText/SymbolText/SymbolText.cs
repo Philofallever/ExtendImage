@@ -7,7 +7,7 @@ namespace ExtendUI.SymbolText
 {
     [RequireComponent(typeof(RectTransform))]
     [AddComponentMenu("UI/SymbolText")]
-    public partial class SymbolText : Text, Owner,ILocalizableText
+    public partial class SymbolText : Text, Owner,ILocalizable
     {
         static SymbolText()
         {
@@ -108,7 +108,7 @@ namespace ExtendUI.SymbolText
         {
             foreach (NodeBase node in mNodeList)
                 FreeNode(node);
-            
+
             mNodeList.Clear();
             FreeDraws();
         }
@@ -211,8 +211,8 @@ namespace ExtendUI.SymbolText
         {
             mRenderCache = new RenderCache(this);
             base.Awake();
-            if (Localization.CurrLangCfg.Font)
-                font = Localization.CurrLangCfg.Font;
+            Localize();
+            Localization.Register(this);
             m_textDirty = true;
             m_renderNodeDirty = true;
 
@@ -243,8 +243,6 @@ namespace ExtendUI.SymbolText
 
         [SerializeField]
         bool m_isCheckFontY = false;
-
-        private ILocalizableText _ilocalizableTextImplementation;
 
         public bool isCheckFontY
         {
@@ -367,7 +365,6 @@ namespace ExtendUI.SymbolText
         {
             base.OnEnable();
             ActiveList.Add(this);
-            Localization.Register(this);
         }
 
         protected override void OnDisable()
@@ -375,7 +372,6 @@ namespace ExtendUI.SymbolText
             base.OnDisable();
             FreeDraws();
             ActiveList.Remove(this);
-            Localization.Ungister(this);
         }
 
         protected override void OnDestroy()
@@ -385,6 +381,7 @@ namespace ExtendUI.SymbolText
 
             FreeDraws();
             base.OnDestroy();
+            Localization.UnRegister(this);
             Clear();
         }
 
@@ -395,10 +392,10 @@ namespace ExtendUI.SymbolText
                 m_UsedDraws[i].UpdateSelf(deltaTime);
         }
 
-        public void Localize(Font localFont)
+        public void Localize()
         {
-            if(localFont)
-                font = localFont;
+            if (Localization.CurrFont && font != Localization.CurrFont)
+                font = Localization.CurrFont;
         }
     }
 }
