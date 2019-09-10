@@ -34,6 +34,7 @@ namespace ExtendUI
                     return;
 
                 m_Grey = value;
+                material = m_Grey ? GreyMaterial : null;
                 SetMaterialDirty();
             }
         }
