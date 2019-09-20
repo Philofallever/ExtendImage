@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ExtendUI;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Test : MonoBehaviour
@@ -19,5 +21,17 @@ public class Test : MonoBehaviour
         {
         }
 
+    }
+
+    [Button]
+    void SetId(int colorId)
+    {
+        GetComponentInChildren<ExtendText>().colorId = colorId;
+    }
+
+    [Button]
+    void SetHeight(bool value)
+    {
+        GetComponentInChildren<ExtendText>().highlight = value;
     }
 }

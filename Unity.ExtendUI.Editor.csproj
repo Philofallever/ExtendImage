@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtendUI\Editor\ExtendImage\ExtendImageEditor.cs" />
+    <Compile Include="ExtendUI\Editor\ExtendText\ExtendTextEditor.cs" />
     <Compile Include="ExtendUI\Editor\ExtendText\SymbolText\SymbolLabelEditor.cs" />
     <Compile Include="ExtendUI\Editor\ExtendText\SymbolText\SymbolTextEditor.cs" />
     <Compile Include="ExtendUI\Editor\ExtendUIMunuOptions.cs" />

@@ -120,6 +120,7 @@
     <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\TextParser\TextParser_FunChar.cs" />
     <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\TextParser\TextParser_Hy.cs" />
     <Compile Include="ExtendUI\Runtime\ExtendText\SymbolText\TextParser\TextParser_Tag.cs" />
+    <Compile Include="ExtendUI\Runtime\ExtendUIUtility.cs" />
     <Compile Include="ExtendUI\Runtime\Localization\Localization.cs" />
     <Compile Include="ExtendUI\Runtime\SuperScrollView\Common\ClickEventListener.cs" />
     <Compile Include="ExtendUI\Runtime\SuperScrollView\Common\CommonDefine.cs" />

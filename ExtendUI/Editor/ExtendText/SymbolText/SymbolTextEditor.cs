@@ -44,7 +44,7 @@ namespace ExtendUI.SymbolText
             serializedObject.Update();
 
             OnGUIFontData();
-            AppearanceControlsGUI();
+            //AppearanceControlsGUI();
             RaycastControlsGUI();
 
             EditorGUILayout.PropertyField(m_LineAlignment);
