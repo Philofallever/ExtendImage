@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace ExtendUI.SuperScrollView
 {
-
-    public class LoopListViewItem2 : MonoBehaviour
+    [DisallowMultipleComponent]
+    public class LoopListViewItem2 : MonoBehaviour,ISelectHandler
     {
         // indicates the item’s index in the list
         //if itemTotalCount is set -1, then the mItemIndex can be from –MaxInt to +MaxInt.
@@ -31,6 +32,40 @@ namespace ExtendUI.SuperScrollView
         int mUserIntData2 = 0;
         string mUserStringData1 = null;
         string mUserStringData2 = null;
+
+        #region 扩展,Item被选中
+
+        private bool mSelected;
+
+        [SerializeField]
+        GameObject mCheckMark;
+
+        public bool Selected
+        {
+            get => mSelected;
+            set
+            {
+                if(mSelected == value)
+                    return;
+
+                mSelected = value;
+                if(mCheckMark)
+                    mCheckMark.SetActive(mSelected);
+            }
+        }
+
+        public void OnSelect(BaseEventData eventData)
+        {
+            for (var i = 0; i < mParentListView.ShownItemCount; i++)
+            {
+                var listItem = mParentListView.GetShownItemByIndexWithoutCheck(i);
+                listItem.Selected = false;
+            }
+
+            Selected = true;
+        }
+
+        #endregion
 
         public object UserObjectData
         {
@@ -245,6 +280,5 @@ namespace ExtendUI.SuperScrollView
                 return ItemSize + mPadding;
             }
         }
-
     }
 }
