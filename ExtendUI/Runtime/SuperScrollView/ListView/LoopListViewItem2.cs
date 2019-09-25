@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 namespace ExtendUI.SuperScrollView
 {
     [DisallowMultipleComponent]
-    public class LoopListViewItem2 : MonoBehaviour,ISelectHandler
+    public class LoopListViewItem2 : MonoBehaviour,IPointerClickHandler
     {
         // indicates the item’s index in the list
         //if itemTotalCount is set -1, then the mItemIndex can be from –MaxInt to +MaxInt.
@@ -54,8 +54,10 @@ namespace ExtendUI.SuperScrollView
             }
         }
 
-        public void OnSelect(BaseEventData eventData)
+        public void OnPointerClick(PointerEventData eventData)
         {
+            if(mSelected) return;
+
             for (var i = 0; i < mParentListView.ShownItemCount; i++)
             {
                 var listItem = mParentListView.GetShownItemByIndexWithoutCheck(i);
