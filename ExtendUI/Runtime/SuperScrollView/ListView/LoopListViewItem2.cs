@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 namespace ExtendUI.SuperScrollView
 {
     [DisallowMultipleComponent]
-    public class LoopListViewItem2 : MonoBehaviour,IPointerClickHandler
+    public class LoopListViewItem2 : MonoBehaviour
     {
         // indicates the item’s index in the list
         //if itemTotalCount is set -1, then the mItemIndex can be from –MaxInt to +MaxInt.
@@ -28,43 +28,17 @@ namespace ExtendUI.SuperScrollView
         float mStartPosOffset = 0;
 
         object mUserObjectData = null;
+        ISelectHandler mSelectHandler = null;
         int mUserIntData1 = 0;
         int mUserIntData2 = 0;
         string mUserStringData1 = null;
         string mUserStringData2 = null;
 
-        #region 扩展,Item被选中
+        #region 选中效果
 
-        private bool mSelected;
-
-        [SerializeField]
-        GameObject mCheckMark;
-
-        public bool Selected
+        private void Awake()
         {
-            get => mSelected;
-            set
-            {
-                if(mSelected == value)
-                    return;
-
-                mSelected = value;
-                if(mCheckMark)
-                    mCheckMark.SetActive(mSelected);
-            }
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if(mSelected) return;
-
-            for (var i = 0; i < mParentListView.ShownItemCount; i++)
-            {
-                var listItem = mParentListView.GetShownItemByIndexWithoutCheck(i);
-                listItem.Selected = false;
-            }
-
-            Selected = true;
+            mSelectHandler = GetComponent<ISelectHandler>();
         }
 
         #endregion
@@ -74,6 +48,9 @@ namespace ExtendUI.SuperScrollView
             get { return mUserObjectData; }
             set { mUserObjectData = value; }
         }
+
+        public ISelectHandler SelectHandler => mSelectHandler;
+
         public int UserIntData1
         {
             get { return mUserIntData1; }

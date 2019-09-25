@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ExtendUI.SuperScrollView
 {
-
+    [DisallowMultipleComponent]
     public class LoopGridViewItem : MonoBehaviour
     {
         // indicates the item’s index in the list the mItemIndex can only be from 0 to itemTotalCount -1.
@@ -24,6 +24,7 @@ namespace ExtendUI.SuperScrollView
         int mItemCreatedCheckFrameCount = 0;
 
         object mUserObjectData = null;
+        ISelectHandler mSelectHandler;
         int mUserIntData1 = 0;
         int mUserIntData2 = 0;
         string mUserStringData1 = null;
@@ -32,11 +33,23 @@ namespace ExtendUI.SuperScrollView
         LoopGridViewItem mPrevItem;
         LoopGridViewItem mNextItem;
 
+        #region 选中效果
+
+        private void Awake()
+        {
+            mSelectHandler = GetComponent<ISelectHandler>();
+        }
+
+        #endregion
+
         public object UserObjectData
         {
             get { return mUserObjectData; }
             set { mUserObjectData = value; }
         }
+
+        public ISelectHandler SelectHandler => mSelectHandler;
+
         public int UserIntData1
         {
             get { return mUserIntData1; }
