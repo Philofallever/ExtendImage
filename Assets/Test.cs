@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using ExtendUI;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Test : MonoBehaviour
+public class Test : MonoBehaviour,ISelectHandler,IDeselectHandler
 {
 
     [RuntimeInitializeOnLoadMethod]
@@ -26,12 +27,23 @@ public class Test : MonoBehaviour
     [Button]
     void SetId(int colorId)
     {
-        GetComponentInChildren<ExtendText>().colorId = colorId;
+        //GetComponentInChildren<ExtendText>().colorId = colorId;
     }
 
     [Button]
     void SetHeight(bool value)
     {
-        GetComponentInChildren<ExtendText>().highlight = value;
+        //selectb
+        //GetComponentInChildren<ExtendText>().highlight = value;
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        print("onselsect");
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        print("ondesct");
     }
 }

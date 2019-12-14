@@ -98,6 +98,12 @@ namespace UnityEditor.UI
             Load<SymbolTextCfg>();
         }
 
+        [MenuItem("ExtendUI/数字字体",false)]
+        private static void DoIt()
+        {
+            EditorWindow.GetWindow<EditCustomFontWindow>("创建字体");
+        }
+
         /* 富文本表情
         [MenuItem("ExtendUI/CheckFileName",false)]
         static void CheckFileName()
