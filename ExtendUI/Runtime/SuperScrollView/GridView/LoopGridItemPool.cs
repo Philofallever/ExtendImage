@@ -93,7 +93,8 @@ namespace ExtendUI.SuperScrollView
         {
             item.PrevItem = null;
             item.NextItem = null;
-            mTmpPooledItemList.Add(item);
+            // 按序回收
+            mTmpPooledItemList.Insert(0,item);
         }
         public void ClearTmpRecycledItem()
         {

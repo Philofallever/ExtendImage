@@ -55,9 +55,15 @@ namespace UnityEditor.UI
                 obj.name = nameof(ExtendText);
                 Object.DestroyImmediate(obj.GetComponent<Text>());
                 var extendText = obj.AddComponent<ExtendText>();
-                extendText.fontSize        = 36;
+                extendText.fontSize        = 28;
+                extendText.resizeTextForBestFit = false;
+                //extendText.resizeTextMinSize = 12;
+                //extendText.resizeTextMaxSize = 25;
                 extendText.supportRichText = false;
                 extendText.raycastTarget   = false;
+
+                var srcFieldInfo = typeof(ExtendText).GetField("m_Shrink", BindingFlags.Instance | BindingFlags.NonPublic);
+                srcFieldInfo.SetValue(extendText, true);
             }
         }
 

@@ -97,7 +97,9 @@ namespace ExtendUI.SuperScrollView
         }
         public void RecycleItem(LoopListViewItem2 item)
         {
-            mTmpPooledItemList.Add(item);
+            // 避免刷新时视图跳动
+            //mTmpPooledItemList.Add(item);
+            mTmpPooledItemList.Insert(0, item);
         }
         public void ClearTmpRecycledItem()
         {

@@ -5,21 +5,21 @@ namespace ExtendUI.SymbolText
 {
     public interface Owner
     {
-        // ×îÐ¡ÐÐ¸ß
+        // ï¿½ï¿½Ð¡ï¿½Ð¸ï¿½
         int minLineHeight { get; set; }
 
         Around around { get; }
 
         RenderCache renderCache { get; }
-
+        int wordSpacing { get; }
         Anchor anchor { get; }
 
         void SetRenderDirty();
 
-        // ÔªËØ·Ö¸î
+        // Ôªï¿½Ø·Ö¸ï¿½
         ElementSegment elementSegment { get; }
 
-        // Í¨¹ýÎÆÀí»ñÈ¡äÖÈ¾¶ÔÏó,»á¿¼ÂÇºÏ²¢µÄÇé¿ö
+        // Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½,ï¿½á¿¼ï¿½ÇºÏ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Draw GetDraw(DrawType type, long key, Action<Draw, object> onCreate, object para = null);
 
         Material material { get; }

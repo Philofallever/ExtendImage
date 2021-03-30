@@ -38,11 +38,11 @@ namespace ExtendUI.SymbolText
                 return c;
             if (name[startpos] == '#')
             {
-                return Tools.ParseColor(name, startpos, c);
+                return Tools.ParseColor(name, startpos + 1, c);
             }
             else
             {
-                return ColorConst.Get(name, c);
+                return ColorConst.Get(startpos == 0 ? name : name.Substring(startpos), c);
             }
         }
 
@@ -87,7 +87,7 @@ namespace ExtendUI.SymbolText
             Reg("sprite ", (string tag, TagAttributes att) =>
             {
                 string name = att.getValueAsString("n");
-                Sprite sprite = Tools.GetSprite(name);
+                ISprite sprite = Tools.GetSprite(name);
                 if (sprite == null)
                 {
                     // 没有查找到
@@ -95,10 +95,10 @@ namespace ExtendUI.SymbolText
                     return;
                 }
 
-                Vector2 size = sprite.rect.size;
+                Vector2 size = new Vector2(sprite.width, sprite.height);
 
                 SpriteNode sn = CreateNode<SpriteNode>();
-                sn.sprite = sprite;
+                sn.SetSprite(sprite);
                 sn.SetConfig(currentConfig);
 
                 SetSizeConfig(sn, att, size);
@@ -117,7 +117,7 @@ namespace ExtendUI.SymbolText
 
             Reg("RectSprite ", (string tag, TagAttributes att) =>
             {
-                Sprite s = Tools.GetSprite(att.getValueAsString("n")); // 名字
+                ISprite s = Tools.GetSprite(att.getValueAsString("n")); // 名字
                 if (s == null)
                 {
                     // 没有查找到
@@ -127,16 +127,16 @@ namespace ExtendUI.SymbolText
 
                 RectSpriteNode sn = CreateNode<RectSpriteNode>();
                 sn.SetConfig(currentConfig);
-                Rect rect = s.rect;
-                sn.sprite = s;
+                //Rect rect = s.rect;
+                sn.SetSprite(s);
 
-                sn.rect.width = att.getValueAsFloat("w", rect.width);
-                sn.rect.height = att.getValueAsFloat("h", rect.height);
+                sn.rect.width = att.getValueAsFloat("w", s.width);
+                sn.rect.height = att.getValueAsFloat("h", s.height);
 
                 switch (att.getValueAsInteger("t", 0))
                 {
-                case 1: sn.rect.height = sn.rect.width * rect.height / rect.width; break;
-                case 2: sn.rect.width = sn.rect.height * rect.width / rect.height; break;
+                case 1: sn.rect.height = sn.rect.width * s.height / s.width; break;
+                case 2: sn.rect.width = sn.rect.height * s.width / s.height; break;
                 }
 
                 sn.rect.x = att.getValueAsFloat("px", 0f);
@@ -192,7 +192,7 @@ namespace ExtendUI.SymbolText
                 if (string.IsNullOrEmpty(param))
                     return;
 
-                currentConfig.fontColor = ParserColorName(param, 1, currentConfig.fontColor);
+                currentConfig.fontColor = ParserColorName(param, 0, currentConfig.fontColor);
             });
 
             TagFuns.Add("/color", (string tag, string param)=> 
@@ -294,17 +294,12 @@ namespace ExtendUI.SymbolText
             config.effectDistance.y = att.getValueAsFloat("y", 1f);
         }
 
-        void TagParam(string tag, string param)
+        System.Action<string, string> GetTagAction(string tag)
         {
-            System.Action<string, string>  fun;
-            if (TagFuns.TryGetValue(tag, out fun))
-            {
-                fun(tag, param);
-            }
-            else
-            {
-                Debug.LogWarningFormat("tag:{0} param:{1} not find!", tag, param);
-            }
+            if (TagFuns.TryGetValue(tag, out var fun))
+                return fun;
+
+            return null;
         }
     }
 }

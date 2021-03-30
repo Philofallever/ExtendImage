@@ -13,6 +13,7 @@ namespace ExtendUI
         private SerializedProperty m_GradientColor;
         private SerializedProperty m_GradientStyle;
         private SerializedProperty m_GradientDirection;
+        private SerializedProperty m_Shrink;
 
         private AnimBool m_ShowGradient;
 
@@ -24,6 +25,7 @@ namespace ExtendUI
             m_GradientColor = serializedObject.FindProperty(nameof(m_GradientColor));
             m_GradientStyle = serializedObject.FindProperty(nameof(m_GradientStyle));
             m_GradientDirection = serializedObject.FindProperty(nameof(m_GradientDirection));
+            m_Shrink = serializedObject.FindProperty("m_Shrink");
 
             m_ShowGradient = new AnimBool(m_Gradient.boolValue);
             m_ShowGradient.valueChanged.AddListener(Repaint);
@@ -50,6 +52,7 @@ namespace ExtendUI
             if (EditorGUILayout.BeginFadeGroup(m_ShowGradient.faded))
                 GradientGUI();
             EditorGUILayout.EndFadeGroup();
+            EditorGUILayout.PropertyField(m_Shrink);
 
             serializedObject.ApplyModifiedProperties();
         }

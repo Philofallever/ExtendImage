@@ -32,9 +32,9 @@ namespace ExtendUI.SymbolText
             return true;
         }
 
-        public override void Release()
+        protected override void ReleaseSelf()
         {
-            base.Release();
+            base.ReleaseSelf();
             isEnter = false;
         }
     };

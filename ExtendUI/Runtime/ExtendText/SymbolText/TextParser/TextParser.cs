@@ -23,10 +23,17 @@ namespace ExtendUI.SymbolText
     {
         public T CreateNode<T>() where T : NodeBase, new()
         {
-            T t = new T();
+            //T t = new T();
+            var t = NodePools<T>.Get();
             t.Reset(mOwner, currentConfig.anchor);
+            t.free = FreeNode<T>;
 
             return t;
+        }
+
+        static void FreeNode<T>(NodeBase nb) where T : NodeBase, new()
+        {
+            NodePools<T>.Free((T)nb);
         }
 
         static bool Get(char c, out Anchor a)
@@ -220,8 +227,21 @@ namespace ExtendUI.SymbolText
 
         System.Func<TagAttributes, IExternalNode> getExternalNode = null;
 
+        static char[] s_tag_key = new char[] { ' ', '=' };
+
         public void parser(Owner owner, string text, Config config, List<NodeBase> vList, System.Func<TagAttributes, IExternalNode> getExternalNode)
         {
+            if (string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+
+            if (config.font == null)
+            {
+                Debug.LogError("TextParser pFont == null");
+                return;
+            }
+
             clear();
 
             mOwner = owner;
@@ -229,17 +249,6 @@ namespace ExtendUI.SymbolText
             d_nodeList = vList;
             startConfig.Set(config);
             currentConfig.Set(config);
-
-            if (currentConfig.font == null)
-            {
-                Debug.LogError("TextParser pFont == null");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return;
-            }
 
             int lenght = text.Length;
             while (lenght > d_curPos)
@@ -263,7 +272,7 @@ namespace ExtendUI.SymbolText
                                 string tag = null;
                                 string param = null;
 
-                                int tagend = text.IndexOfAny(new char[] { ' ', '=' }, d_curPos);
+                                int tagend = text.IndexOfAny(s_tag_key, d_curPos);
                                 if (tagend != -1 && tagend < endpos)
                                 {
                                     tag = text.Substring(d_curPos + 1, tagend - d_curPos);
@@ -274,19 +283,18 @@ namespace ExtendUI.SymbolText
                                     tag = text.Substring(d_curPos + 1, endpos - d_curPos - 1);
                                 }
 
-                                if (d_text.Length != 0)
-                                    save(false);
-
-                                TagParam(tag, param);
-
-                                d_curPos = endpos + 1;
-                                break;
-                            }
-                            else
-                            {
-                                d_text.Append(text[d_curPos]);
+                                var func = GetTagAction(tag);
+                                if (func != null)
+                                {
+                                    if (d_text.Length != 0)
+                                        save(false);
+                                    func(tag, param);
+                                    d_curPos = endpos + 1;
+                                    break;
+                                }
                             }
 
+                            d_text.Append(text[d_curPos]);
                             ++d_curPos;
                         }
                         break;
@@ -313,7 +321,7 @@ namespace ExtendUI.SymbolText
                     {
                         fun(text);
                     }
-                    else
+                    else if (!ParserCartoon(text))
                     {
                         d_text.Append(text[d_curPos]);
                         ++d_curPos;

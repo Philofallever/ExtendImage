@@ -39,6 +39,11 @@ namespace ExtendUI.SymbolText
         protected LinkedList<NodeBase> mNodeList = new LinkedList<NodeBase>();
 
         [SerializeField]
+        int wordSpacing = 0;
+
+        int Owner.wordSpacing { get { return wordSpacing; } }
+
+        [SerializeField]
         string m_ElementSegment = "Default"; // 分割类型
 
         protected bool m_textDirty = false; // 文字内容变化了，需要重新解析下结点
@@ -92,7 +97,7 @@ namespace ExtendUI.SymbolText
             get { return (Anchor)alignment; }
         }
 
-        static void FreeNode(NodeBase node)
+        protected static void FreeNode(NodeBase node)
         {
             if (node == null)
             {
@@ -108,7 +113,7 @@ namespace ExtendUI.SymbolText
         {
             foreach (NodeBase node in mNodeList)
                 FreeNode(node);
-
+            
             mNodeList.Clear();
             FreeDraws();
         }
@@ -205,7 +210,7 @@ namespace ExtendUI.SymbolText
             }
         }
 
-        List<Line> mLines = new List<Line>(); // 每一行的大小
+        public List<Line> mLines = new List<Line>(); // 每一行的大小
 
         protected override void Awake()
         {

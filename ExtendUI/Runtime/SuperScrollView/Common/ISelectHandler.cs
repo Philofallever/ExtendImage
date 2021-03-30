@@ -8,6 +8,7 @@ namespace ExtendUI.SuperScrollView
 {
     public  interface ISelectHandler
     {
-        bool Selected { set; }
+        bool Selected { get; }
+        void SetSelectedStatus(bool selected, bool instant = false);
     }
 }

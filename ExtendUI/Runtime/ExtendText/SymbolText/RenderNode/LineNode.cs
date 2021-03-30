@@ -29,10 +29,8 @@ namespace ExtendUI.SymbolText
             x = offsetX;
         }
 
-        public override void Release()
+        protected override void ReleaseSelf()
         {
-            base.Release();
-
             height = 0f;
         }
 	};

@@ -23,6 +23,8 @@ namespace ExtendUI
 
         //private int m_ColorId;
         //private bool m_Highlight = false;
+        [SerializeField]
+        private bool m_Shrink;
 
         [SerializeField]
         private bool m_Gradient;
@@ -101,90 +103,113 @@ namespace ExtendUI
         //            Regex.Replace(value, colorIdTag, ReplaceColorIdTag, RegexOptions.IgnoreCase, TimeSpan.FromSeconds(1));
         //        }
 
-        //        // 源码
-        //        if (string.IsNullOrEmpty(value))
-        //        {
-        //            if (string.IsNullOrEmpty(m_Text))
-        //                return;
+            //        // 源码
+            //        if (string.IsNullOrEmpty(value))
+            //        {
+            //            if (string.IsNullOrEmpty(m_Text))
+            //                return;
 
-        //            m_Text = "";
-        //            SetVerticesDirty();
-        //        }
-        //        else if (m_Text != value)
-        //        {
-        //            m_Text = value;
-        //            SetVerticesDirty();
-        //            SetLayoutDirty();
-        //        }
-        //    }
-        //}
+            //            m_Text = "";
+            //            SetVerticesDirty();
+            //        }
+            //        else if (m_Text != value)
+            //        {
+            //            m_Text = value;
+            //            SetVerticesDirty();
+            //            SetLayoutDirty();
+            //        }
+            //    }
+            //}
 
-        //// 富文本标签替换
-        //private string ReplaceColorIdTag(Match match)
-        //{
-        //    var colorIdStr   = match.Groups[1].Value;
-        //    if (int.TryParse(colorIdStr, out var id))
-        //    {
-        //        var cfgColors = GetCfgColors(id, false);
-        //        return string.Intern($"<color=#{ColorUtility.ToHtmlStringRGB(cfgColors.Source)}>{match.Groups[2].Value}</color>");
-        //    }
+            //// 富文本标签替换
+            //private string ReplaceColorIdTag(Match match)
+            //{
+            //    var colorIdStr   = match.Groups[1].Value;
+            //    if (int.TryParse(colorIdStr, out var id))
+            //    {
+            //        var cfgColors = GetCfgColors(id, false);
+            //        return string.Intern($"<color=#{ColorUtility.ToHtmlStringRGB(cfgColors.Source)}>{match.Groups[2].Value}</color>");
+            //    }
 
-        //    return match.Value;
-        //}
+            //    return match.Value;
+            //}
 
-        //public override Color color
-        //{
-        //    set
-        //    {
-        //        base.color = value;
-        //        m_ColorId = 0;
-        //    }
-        //}
+            //public override Color color
+            //{
+            //    set
+            //    {
+            //        base.color = value;
+            //        m_ColorId = 0;
+            //    }
+            //}
 
-        //public int colorId
-        //{
-        //    get => m_ColorId;
-        //    set
-        //    {
-        //        if (m_ColorId == value)
-        //            return;
+            //public int colorId
+            //{
+            //    get => m_ColorId;
+            //    set
+            //    {
+            //        if (m_ColorId == value)
+            //            return;
 
-        //        var cfgColors = GetCfgColors(value, m_Highlight);
-        //        m_GradientColor = cfgColors.Gradient;
-        //        color           = cfgColors.Source;
-        //        m_ColorId = value;
-        //        SetVerticesDirty();
-        //    }
-        //}
+            //        var cfgColors = GetCfgColors(value, m_Highlight);
+            //        m_GradientColor = cfgColors.Gradient;
+            //        color           = cfgColors.Source;
+            //        m_ColorId = value;
+            //        SetVerticesDirty();
+            //    }
+            //}
 
-        //public bool highlight
-        //{
-        //    get => m_Highlight;
-        //    set
-        //    {
-        //        if(m_Highlight == value)
-        //            return;
+            //public bool highlight
+            //{
+            //    get => m_Highlight;
+            //    set
+            //    {
+            //        if(m_Highlight == value)
+            //            return;
 
-        //        if (m_ColorId == 0)
-        //        {
-        //            m_Highlight = value;
-        //            return;
-        //        }
+            //        if (m_ColorId == 0)
+            //        {
+            //            m_Highlight = value;
+            //            return;
+            //        }
 
-        //        var cfgColors = GetCfgColors(m_ColorId,value);
-        //        m_GradientColor = cfgColors.Gradient;
-        //        var tempColorId = m_ColorId;
-        //        color = cfgColors.Source;
-        //        m_ColorId = tempColorId;
-        //        m_Highlight = value;
-        //        SetVerticesDirty();
-        //    }
-        //}
+            //        var cfgColors = GetCfgColors(m_ColorId,value);
+            //        m_GradientColor = cfgColors.Gradient;
+            //        var tempColorId = m_ColorId;
+            //        color = cfgColors.Source;
+            //        m_ColorId = tempColorId;
+            //        m_Highlight = value;
+            //        SetVerticesDirty();
+            //    }
+            //}
 
-        //private (Color Source, Color Gradient) GetCfgColors(int colId,bool isHighLight)
-        //{
-        //    return ExtendUIUtility.textColorFunc?.Invoke(colId, isHighLight) ?? (Color.white, Color.black);
-        //}
+            //private (Color Source, Color Gradient) GetCfgColors(int colId,bool isHighLight)
+            //{
+            //    return ExtendUIUtility.textColorFunc?.Invoke(colId, isHighLight) ?? (Color.white, Color.black);
+            //}
+
+        public int VisibleLines { get; private set; }
+        private void Shrink()
+        {
+            TextGenerationSettings settings = GetGenerationSettings(rectTransform.rect.size);
+            if (m_Shrink)
+            {
+                settings.resizeTextForBestFit = false;
+                Rect rect = rectTransform.rect;
+                var height = cachedTextGenerator.GetPreferredHeight(text, settings);
+                if (height > rect.height)
+                {
+                    var s = settings.fontSize;
+                    for (int i = s; i >= 0; --i)
+                    {
+                        settings.fontSize = i;
+                        var h = cachedTextGenerator.GetPreferredHeight(text, settings);
+                        if (h <= rect.height) break;
+                    }
+                }
+                cachedTextGenerator.Populate(text, settings);
+            }
+        }
 
         private readonly UIVertex[] m_TempVerts = new UIVertex[4];
 
@@ -209,6 +234,7 @@ namespace ExtendUI
 
             var settings = GetGenerationSettings(extents);
             cachedTextGenerator.PopulateWithErrors(text, settings, gameObject);
+            Shrink();
 
             // Apply the offset to the vertices
             IList<UIVertex> verts         = cachedTextGenerator.verts;
@@ -352,6 +378,8 @@ namespace ExtendUI
             }
 
             m_DisableFontTextureRebuiltCallback = false;
+
+            VisibleLines = cachedTextGenerator.lineCount;
         }
     }
 }

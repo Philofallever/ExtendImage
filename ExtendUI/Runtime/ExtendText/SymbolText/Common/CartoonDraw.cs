@@ -4,6 +4,26 @@ using System.Collections.Generic;
 
 namespace ExtendUI.SymbolText
 {
+    class SpriteData
+    {
+        public Vector2 leftPos;
+        public Color color;
+        public float width;
+        public float height;
+
+        public void Gen(VertexHelper vh, Vector4 uv)
+        {
+            int count = vh.currentVertCount;
+            vh.AddVert(new Vector3(leftPos.x, leftPos.y), color, new Vector2(uv.x, uv.y));
+            vh.AddVert(new Vector3(leftPos.x, leftPos.y + height), color, new Vector2(uv.x, uv.w));
+            vh.AddVert(new Vector3(leftPos.x + width, leftPos.y + height), color, new Vector2(uv.z, uv.w));
+            vh.AddVert(new Vector3(leftPos.x + width, leftPos.y), color, new Vector2(uv.z, uv.y));
+
+            vh.AddTriangle(count, count + 1, count + 2);
+            vh.AddTriangle(count + 2, count + 3, count);
+        }
+    }
+
     [ExecuteInEditMode]
     public class CartoonDraw : EffectDrawObjec, ICanvasElement
     {
@@ -15,45 +35,22 @@ namespace ExtendUI.SymbolText
 
         void UpdateAnim(float deltaTime)
         {
+            if (frameIndex < 0)
+                frameIndex = 0;
+
             mDelta += Mathf.Min(1f, deltaTime);
-            var fps = cartoon.fps > 1f ? cartoon.fps : 0.0001f;
-            float rate = 1f / fps;
-
-            while (rate < mDelta)
+            var frame = cartoon.frames[frameIndex];
+            if (mDelta >= frame.delay)
             {
-                mDelta = (rate > 0f) ? mDelta - rate : 0f;
-
-                if (++frameIndex >= cartoon.sprites.Length)
+                mDelta -= frame.delay;
+                if (++frameIndex >= cartoon.frames.Length)
                 {
                     frameIndex = 0;
                 }
             }
-
-            if (frameIndex < 0)
-                frameIndex = 0;
         }
 
-        class Data
-        {
-            public Vector2 leftPos;
-            public Color color;
-            public float width;
-            public float height;
-
-            public void Gen(VertexHelper vh, Vector4 uv)
-            {
-                int count = vh.currentVertCount;
-                vh.AddVert(new Vector3(leftPos.x, leftPos.y), color, new Vector2(uv.x, uv.y));
-                vh.AddVert(new Vector3(leftPos.x, leftPos.y + height), color, new Vector2(uv.x, uv.w));
-                vh.AddVert(new Vector3(leftPos.x + width, leftPos.y + height), color, new Vector2(uv.z, uv.w));
-                vh.AddVert(new Vector3(leftPos.x + width, leftPos.y), color, new Vector2(uv.z, uv.y));
-
-                vh.AddTriangle(count, count + 1, count + 2);
-                vh.AddTriangle(count + 2, count + 3, count);
-            }
-        }
-
-        List<Data> mData = new List<Data>();
+        List<SpriteData> mData = new List<SpriteData>();
 
         public bool isOpenAlpha
         {
@@ -69,7 +66,13 @@ namespace ExtendUI.SymbolText
 
         public void Add(Vector2 leftPos, float width, float height, Color color)
         {
-            mData.Add(new Data() { leftPos = leftPos, color = color, width = width, height = height });
+            var sd = PoolData<SpriteData>.Get();
+            sd.leftPos = leftPos;
+            sd.color = color;
+            sd.width = width;
+            sd.height = height;
+
+            mData.Add(sd);
         }
 
         public override void UpdateSelf(float deltaTime)
@@ -78,7 +81,7 @@ namespace ExtendUI.SymbolText
             int f = frameIndex;
             UpdateAnim(deltaTime);
 
-            if (f != frameIndex)
+            if (f != frameIndex || (currentIsEmpty && cartoon.frames[f].sprite.Get() != null))
             {
                 CanvasUpdateRegistry.RegisterCanvasElementForGraphicRebuild(this);
             }
@@ -93,6 +96,7 @@ namespace ExtendUI.SymbolText
 #endif
         }
 
+        bool currentIsEmpty = false;
         public void Rebuild(CanvasUpdate executing)
         {
             if (executing != CanvasUpdate.PreRender)
@@ -101,9 +105,16 @@ namespace ExtendUI.SymbolText
             if (mData == null)
                 return;
 
-            Sprite s = cartoon.sprites[frameIndex];
-            var uv = UnityEngine.Sprites.DataUtility.GetOuterUV(cartoon.sprites[frameIndex]);
+            ISprite si = cartoon.frames[frameIndex].sprite;
+            Sprite s = si.Get();
+            if (s == null)
+            {
+                currentIsEmpty = true;
+                return;
+            }
 
+            currentIsEmpty = false;
+            var uv = UnityEngine.Sprites.DataUtility.GetOuterUV(s);
             VertexHelper vh = Tools.vertexHelper;
             vh.Clear();
             for (int i = 0; i < mData.Count; ++i)
@@ -120,7 +131,7 @@ namespace ExtendUI.SymbolText
         public override void Release()
         {
             base.Release();
-            mData.Clear();
+            PoolData<SpriteData>.FreeList(mData);
             frameIndex = -1;
         }
 

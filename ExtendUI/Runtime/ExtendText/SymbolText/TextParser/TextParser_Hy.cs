@@ -35,22 +35,22 @@ namespace ExtendUI.SymbolText
                 OnFunHys['P'] = ParserSureColor;
 
                 OnFunHys['c'] = ParserFontColor;
-                //OnFunHys['n'] = ParserRestore;
-                //OnFunHys['s'] = ParserFontSize;
-                //OnFunHys['f'] = ParserFont;
+                OnFunHys['n'] = ParserRestore;
+                OnFunHys['s'] = ParserFontSize;
+                OnFunHys['f'] = ParserFont;
                 OnFunHys['#'] = ParserOutputChar;
 
-                //OnFunHys['u'] = (string text) => 
-                //{
-                //    node.d_bUnderline = !node.d_bUnderline; // 下划线
-                //    startPos++;
-                //};
+                OnFunHys['u'] = (string text) => 
+                {
+                    node.d_bUnderline = !node.d_bUnderline; // 下划线
+                    startPos++;
+                };
 
-                //OnFunHys['e'] = (string text) =>
-                //{
-                //    node.d_bStrickout = !node.d_bStrickout; // 下划线
-                //    startPos++;
-                //};
+                OnFunHys['e'] = (string text) =>
+                {
+                    node.d_bStrickout = !node.d_bStrickout; // 下划线
+                    startPos++;
+                };
             }
 
             void ParserOutputChar(string text)

@@ -41,6 +41,9 @@ namespace Coffee.UIExtensions
 
 		static MaterialPropertyBlock s_Mpb;
 
+        // 内存泄露相关
+        Material mNewModifyMat;
+
 		[System.Serializable]
 		public class AnimatableProperty : ISerializationCallbackReceiver
 		{
@@ -109,11 +112,16 @@ namespace Coffee.UIExtensions
 		{
 			get
 			{
-				return _renderer
+                return _renderer
 						? m_IsTrail
 							? _renderer.trailMaterial
-							: _renderer.sharedMaterial
-						: null;
+							:
+//#if UNITY_EDITOR
+//                       Application.isPlaying && _renderer.material ? _renderer.material : _renderer.sharedMaterial
+//#else
+                            _renderer.sharedMaterial
+//#endif
+                        : null;
 			}
 
 			set
@@ -182,12 +190,15 @@ namespace Coffee.UIExtensions
 		public override Material GetModifiedMaterial (Material baseMaterial)
 		{
 			Material mat = null;
-			if (!_renderer)
-				mat = baseMaterial;
-			else if (m_AnimatableProperties.Length == 0)
-				mat = _renderer.sharedMaterial;
-			else
-				mat = new Material (material);
+            if (!_renderer)
+                mat = baseMaterial;
+            else if (m_AnimatableProperties.Length == 0)
+                mat = _renderer.sharedMaterial;
+            else {
+                Destroy(mNewModifyMat);
+                mat = new Material(material);
+                mNewModifyMat = mat;
+            }
 
 			return base.GetModifiedMaterial (mat);
 		}
@@ -197,21 +208,25 @@ namespace Coffee.UIExtensions
 		/// </summary>
 		protected override void OnEnable ()
 		{
-			// Register.
-			if (s_ActiveParticles.Count == 0)
+            lastCount = 0;
+            // Register.
+            if (s_ActiveParticles.Count == 0)
 			{
 				Canvas.willRenderCanvases += UpdateMeshes;
 				s_Mpb = new MaterialPropertyBlock ();
 			}
 			s_ActiveParticles.Add (this);
 
-			// Reset the parent-child relation.
-			GetComponentsInChildren<UIParticle> (false, s_TempRelatables);
-			for (int i = s_TempRelatables.Count - 1; 0 <= i; i--)
-			{
-				s_TempRelatables [i].OnTransformParentChanged ();
-			}
-			s_TempRelatables.Clear ();
+            if (!dontManage)
+            {
+                // Reset the parent-child relation.
+                GetComponentsInChildren<UIParticle>(false, s_TempRelatables);
+                for (int i = s_TempRelatables.Count - 1; 0 <= i; i--)
+                {
+                    s_TempRelatables[i].OnTransformParentChanged();
+                }
+                s_TempRelatables.Clear();
+            }
 
 			_renderer = cachedParticleSystem ? cachedParticleSystem.GetComponent<ParticleSystemRenderer> () : null;
 			if (_renderer && Application.isPlaying)
@@ -231,16 +246,26 @@ namespace Coffee.UIExtensions
 					: rectTransform.position;
 			}
 
-			base.OnEnable ();
+            base.OnEnable ();
 		}
 
-		/// <summary>
-		/// This function is called when the behaviour becomes disabled.
-		/// </summary>
-		protected override void OnDisable ()
+        private void LateUpdate()
+        {
+            if (lastLayer != gameObject.layer)
+            {
+                lastLayer = gameObject.layer;
+                SetMaterialDirty();
+            }
+        }
+
+        /// <summary>
+        /// This function is called when the behaviour becomes disabled.
+        /// </summary>
+        protected override void OnDisable ()
 		{
-			// Unregister.
-			s_ActiveParticles.Remove (this);
+            lastCount = 0;
+            // Unregister.
+            s_ActiveParticles.Remove (this);
 			if (s_ActiveParticles.Count == 0)
 			{
 				Canvas.willRenderCanvases -= UpdateMeshes;
@@ -258,15 +283,29 @@ namespace Coffee.UIExtensions
 			DestroyImmediate (_mesh);
 			_mesh = null;
 			CheckTrail ();
-
-			base.OnDisable ();
+            if (_renderer && Application.isPlaying)
+            {
+                _renderer.enabled = true;
+            }
+            base.OnDisable ();
 		}
 
+        protected override void OnDestroy()
+        {
+            if (_renderer && Application.isPlaying)
+            {
+                _renderer.enabled = true;
+            }
+
+            // 释放材质球
+            Destroy(mNewModifyMat);
+        }
+
 #if UNITY_EDITOR
-		/// <summary>
-		/// Reset to default values.
-		/// </summary>
-		protected override void Reset ()
+        /// <summary>
+        /// Reset to default values.
+        /// </summary>
+        protected override void Reset ()
 		{
 			// Disable ParticleSystemRenderer on reset.
 			if (cachedParticleSystem)
@@ -289,17 +328,20 @@ namespace Coffee.UIExtensions
 		/// </summary>
 		protected override void OnTransformParentChanged ()
 		{
-			UIParticle newParent = null;
-			if (isActiveAndEnabled && !m_IgnoreParent)
-			{
-				var parentTransform = transform.parent;
-				while (parentTransform && (!newParent || !newParent.enabled))
-				{
-					newParent = parentTransform.GetComponent<UIParticle> ();
-					parentTransform = parentTransform.parent;
-				}
-			}
-			SetParent (newParent);
+            if (!dontManage)
+            {
+                UIParticle newParent = null;
+                if (isActiveAndEnabled && !m_IgnoreParent)
+                {
+                    var parentTransform = transform.parent;
+                    while (parentTransform && (!newParent || !newParent.enabled))
+                    {
+                        newParent = parentTransform.GetComponent<UIParticle>();
+                        parentTransform = parentTransform.parent;
+                    }
+                }
+                SetParent(newParent);
+            }
 
 			base.OnTransformParentChanged ();
 		}
@@ -332,7 +374,15 @@ namespace Coffee.UIExtensions
 		List<UIParticle> _children = new List<UIParticle> ();
 		Matrix4x4 scaleaMatrix = default (Matrix4x4);
 		Vector3 _oldPos;
+        int lastLayer = -1;
+        int originRenderQueue = 0;
+        int lastCount = 0;
+        bool initCulling = false;
+        ParticleSystemCullingMode originCullingMode = ParticleSystemCullingMode.Automatic;
+        public bool dontManage = false;
+        public static int uiParticleLevel = 0;
 		static ParticleSystem.Particle [] s_Particles = new ParticleSystem.Particle [4096];
+        static Vector3 zScale = new Vector3(0, 0, 0.0001f);
 
 		/// <summary>
 		/// Update meshes.
@@ -343,37 +393,75 @@ namespace Coffee.UIExtensions
 			{
 				if (s_ActiveParticles [i])
 				{
-					s_ActiveParticles [i].UpdateMesh ();
-				}
+                    UIParticle up = s_ActiveParticles[i];
+                    if(up != null)
+                    {
+                        if (up.gameObject.layer == 16 || up.gameObject.layer == 5)
+                            up.UpdateMesh();
+                        else
+                        {
+                            up.RevertMesh();
+                        }
+                    }
+                }
 			}
 		}
+
+        void RevertMesh()
+        {
+            if (_renderer == null) return;
+            if (_renderer.enabled == false && Application.isPlaying)
+            {
+                _renderer.enabled = true;
+            }
+            if(originRenderQueue != 0 && _renderer.sharedMaterial != null)
+            {
+                _renderer.sharedMaterial.renderQueue = originRenderQueue;
+                originRenderQueue = 0;
+            }
+            if (m_ParticleSystem.main.cullingMode != originCullingMode)
+            {
+                var mainParticle = m_ParticleSystem.main;
+                mainParticle.cullingMode = originCullingMode;
+            }
+            canvasRenderer.Clear();
+        }
 
 		/// <summary>
 		/// Update meshe.
 		/// </summary>
 		void UpdateMesh ()
 		{
-			try
-			{
+
+            if (m_ParticleSystem && lastCount != m_ParticleSystem.particleCount)
+                lastCount = m_ParticleSystem.particleCount;
+            else
+            {
+                if(dontManage && gameObject.layer != 16)
+                    return;
+            }
+
+            try
+            {
 				Profiler.BeginSample ("CheckTrail");
-				CheckTrail ();
+                CheckTrail ();
 				Profiler.EndSample ();
 
 				if (m_ParticleSystem && canvas)
 				{
 					// I do not know why, but it worked fine when setting `transform.localPosition.z` to `0.01`. (#34, #39)
-					{
-						Vector3 pos = rectTransform.localPosition;
-						if (Mathf.Abs (pos.z) < 0.01f)
-						{
-							pos.z = 0.01f;
-							rectTransform.localPosition = pos;
-						}
-					}
+					//{
+					//	Vector3 pos = rectTransform.localPosition;
+					//	if (Mathf.Abs (pos.z) < 0.01f)
+					//	{
+					//		pos.z = 0.01f;
+					//		rectTransform.localPosition = pos;
+					//	}
+					//}
 
 					var rootCanvas = canvas.rootCanvas;
 					Profiler.BeginSample ("Disable ParticleSystemRenderer");
-					if (Application.isPlaying)
+					if (_renderer && Application.isPlaying)
 					{
 						_renderer.enabled = false;
 					}
@@ -381,18 +469,42 @@ namespace Coffee.UIExtensions
 
 					Profiler.BeginSample ("Make Matrix");
 					ParticleSystem.MainModule main = m_ParticleSystem.main;
-					scaleaMatrix = main.scalingMode == ParticleSystemScalingMode.Hierarchy
-												   ? Matrix4x4.Scale (scale * Vector3.one)
-												   : Matrix4x4.Scale (scale * rootCanvas.transform.localScale);
-					Matrix4x4 matrix = default (Matrix4x4);
+                    if (!initCulling)
+                    {
+                        initCulling = true;
+                        originCullingMode = m_ParticleSystem.main.cullingMode;
+                    }
+                    if (m_ParticleSystem.main.cullingMode != ParticleSystemCullingMode.AlwaysSimulate)
+                    {
+                        var mainParticle = m_ParticleSystem.main;
+                        mainParticle.cullingMode = ParticleSystemCullingMode.AlwaysSimulate;
+                    }
+                    //scaleaMatrix = main.scalingMode == ParticleSystemScalingMode.Hierarchy
+                    //							   ? Matrix4x4.Scale (scale * Vector3.one)
+                    //							   : Matrix4x4.Scale (scale * rootCanvas.transform.localScale);
+                    /* 
+                     * fxc
+                        不做跟随rootCanvas的缩放                        
+                       */
+                    scaleaMatrix = Matrix4x4.Scale(scale * Vector3.one);
+                    Matrix4x4 matrix = default (Matrix4x4);
 					switch (main.simulationSpace)
 					{
 						case ParticleSystemSimulationSpace.Local:
 							matrix =
-								scaleaMatrix
-								* Matrix4x4.Rotate (rectTransform.rotation).inverse
-								* Matrix4x4.Scale (rectTransform.lossyScale).inverse;
-							break;
+                                //scaleaMatrix
+                                //* Matrix4x4.Rotate (rectTransform.rotation).inverse
+                                //* Matrix4x4.Scale (rectTransform.lossyScale).inverse;
+
+                                /* 
+                                 * fxc
+                                   1.添加zScale解决z为0的情况
+                                   2.逆矩阵应该先旋转再缩放
+                                */
+                                scaleaMatrix
+                                * Matrix4x4.Scale(rectTransform.lossyScale + zScale).inverse
+                                * Matrix4x4.Rotate(rectTransform.rotation).inverse;
+                            break;
 						case ParticleSystemSimulationSpace.World:
 							matrix =
 								scaleaMatrix
@@ -478,9 +590,18 @@ namespace Coffee.UIExtensions
 					Profiler.BeginSample ("Set mesh and texture to CanvasRenderer");
 					canvasRenderer.SetMesh (_mesh);
 					canvasRenderer.SetTexture (mainTexture);
-
-					// Copy the value from MaterialPropertyBlock to CanvasRenderer (#41)
-					UpdateAnimatableMaterialProperties ();
+                    if (originRenderQueue == 0 && _renderer != null && _renderer.sharedMaterial != null)
+                    {
+                        originRenderQueue = _renderer.sharedMaterial.renderQueue;
+//#if UNITY_EDITOR
+//                        if (Application.isPlaying && _renderer.material != null)
+//                            _renderer.material.renderQueue = 3000;
+//#else
+                        _renderer.sharedMaterial.renderQueue = 3000;
+//#endif
+                    }
+                    // Copy the value from MaterialPropertyBlock to CanvasRenderer (#41)
+                    UpdateAnimatableMaterialProperties ();
 
 					Profiler.EndSample ();
 				}
@@ -506,6 +627,7 @@ namespace Coffee.UIExtensions
 					trans.localPosition = Vector3.zero;
 					trans.localRotation = Quaternion.identity;
 					trans.localScale = Vector3.one;
+                    trans.gameObject.layer = gameObject.layer;
 
 					m_TrailParticle._renderer = GetComponent<ParticleSystemRenderer> ();
 					m_TrailParticle.m_ParticleSystem = GetComponent<ParticleSystem> ();

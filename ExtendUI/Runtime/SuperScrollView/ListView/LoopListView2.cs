@@ -90,7 +90,7 @@ namespace ExtendUI.SuperScrollView
         [SerializeField]
         bool mSupportScrollBar = true;
         bool mIsDraging = false;
-        PointerEventData mPointerEventData = null;
+        public PointerEventData mPointerEventData = null;
         public System.Action mOnBeginDragAction = null;
         public System.Action mOnDragingAction = null;
         public System.Action mOnEndDragAction = null;
@@ -438,8 +438,7 @@ namespace ExtendUI.SuperScrollView
                 UpdateAllShownItemsPos();
                 return;
             }
-            MovePanelToItemIndex(maxItemIndex, 0);
-
+//            MovePanelToItemIndex(maxItemIndex, 0);
         }
 
         //To get the visible item by itemIndex. If the item is not visible, then this method return null.
@@ -666,6 +665,8 @@ namespace ExtendUI.SuperScrollView
         */
         public void MovePanelToItemIndex(int itemIndex, float offset)
         {
+            if (mScrollRect == null) return;
+
             mScrollRect.StopMovement();
             mCurSnapData.Clear();
             if (mItemTotalCount == 0)
@@ -1060,11 +1061,11 @@ namespace ExtendUI.SuperScrollView
                 return;
             }
             mIsDraging = false;
-            mPointerEventData = null;
             if (mOnEndDragAction != null)
             {
                 mOnEndDragAction();
             }
+            mPointerEventData = null;
             ForceSnapUpdateCheck();
         }
 
@@ -1087,9 +1088,14 @@ namespace ExtendUI.SuperScrollView
             {
                 mPointerEventData = new PointerEventData(EventSystem.current);
             }
-            mPointerEventData.button = eventData.button;
-            mPointerEventData.position = eventData.position;
-            mPointerEventData.pointerPressRaycast = eventData.pointerPressRaycast;
+
+            mPointerEventData.scrollDelta           = eventData.scrollDelta;
+            mPointerEventData.pointerDrag           = eventData.pointerDrag;
+            mPointerEventData.delta                 = eventData.delta;
+            mPointerEventData.dragging              = eventData.dragging;
+            mPointerEventData.button                = eventData.button;
+            mPointerEventData.position              = eventData.position;
+            mPointerEventData.pointerPressRaycast   = eventData.pointerPressRaycast;
             mPointerEventData.pointerCurrentRaycast = eventData.pointerCurrentRaycast;
         }
 
@@ -2814,7 +2820,7 @@ namespace ExtendUI.SuperScrollView
         }
 
 
-        void UpdateAllShownItemsPos()
+       public void UpdateAllShownItemsPos()
         {
             int count = mItemList.Count;
             if (count == 0)
@@ -2927,7 +2933,7 @@ namespace ExtendUI.SuperScrollView
                 mNeedAdjustVec = true;
             }
         }
-        void UpdateContentSize()
+        public void UpdateContentSize()
         {
             float size = GetContentPanelSize();
             if (mIsVertList)

@@ -15,8 +15,10 @@ namespace ExtendUI
 
         private SerializedProperty m_Mirror;
         private SerializedProperty m_Grey;
+        private SerializedProperty m_CircleMask;
         private SerializedProperty m_Localiable;
         private AnimBool           m_ShowImgType;
+        private SerializedProperty m_HandleRect;
 
         protected override void OnEnable()
         {
@@ -26,7 +28,9 @@ namespace ExtendUI
             m_UseSpriteMesh  = serializedObject.FindProperty("m_UseSpriteMesh");
             m_Mirror         = serializedObject.FindProperty("m_Mirror");
             m_Grey           = serializedObject.FindProperty("m_Grey");
+            m_CircleMask     = serializedObject.FindProperty("m_CircleMask");
             m_Localiable     = serializedObject.FindProperty("m_Localiable");
+            m_HandleRect = serializedObject.FindProperty("m_HandleRect");
 
             m_ShowImgType = new AnimBool(m_Sprite.objectReferenceValue != null);
             base.OnEnable();
@@ -56,6 +60,11 @@ namespace ExtendUI
                 {
                     EditorGUILayout.PropertyField(m_UseSpriteMesh);
                     EditorGUILayout.PropertyField(m_Mirror);
+                    EditorGUILayout.PropertyField(m_CircleMask);
+                }
+                if ((Image.Type)m_Type.enumValueIndex == Image.Type.Filled)
+                {
+                    EditorGUILayout.PropertyField(m_HandleRect);
                 }
 
                 EditorGUILayout.PropertyField(m_PreserveAspect);

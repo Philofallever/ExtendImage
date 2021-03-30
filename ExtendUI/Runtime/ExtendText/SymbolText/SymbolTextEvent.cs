@@ -68,10 +68,7 @@ namespace ExtendUI.SymbolText
             if (d_down_basedata != up_node)
                 return;
 
-            if (d_down_basedata != null)
-            {
-                OnClick.Invoke(d_down_basedata.node);
-            }
+            OnClick?.Invoke(d_down_basedata?.node);
         }
 
         Vector2 localPosition;

@@ -20,9 +20,8 @@ namespace ExtendUI.SymbolText
             return width;
         }
 
-        public override void Release()
+        protected override void ReleaseSelf()
         {
-            base.Release();
             width = 0f;
             height = 0f;
         }

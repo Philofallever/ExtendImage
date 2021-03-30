@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BlzClient;
+using UnityEngine;
 using UnityEngine.Sprites;
 using UnityEngine.UI;
 
@@ -11,7 +12,13 @@ namespace ExtendUI
         private bool m_Grey;
 
         [SerializeField]
+        private bool m_CircleMask;
+
+        [SerializeField]
         private bool m_Localiable = false;
+
+        [SerializeField]
+        private RectTransform m_HandleRect;
 
         private static Material m_GreyMaterial; // 灰色材质
 
@@ -20,14 +27,14 @@ namespace ExtendUI
             get
             {
                 if (m_GreyMaterial == null)
-                    m_GreyMaterial = new Material(Shader.Find("UI/ImageGrey"));
+                    m_GreyMaterial = Core.res.LoadGlobal<Material>("System/Mats/UIGray");
                 return m_GreyMaterial;
             }
         }
 
         public bool Grey
         {
-            get => m_Grey;
+            get => m_Grey; 
             set
             {
                 if (m_Grey == value)
@@ -35,6 +42,19 @@ namespace ExtendUI
 
                 m_Grey = value;
                 material = m_Grey ? GreyMaterial : null;
+                SetMaterialDirty();
+            }
+        }
+
+        public bool CircleMask
+        {
+            get => m_CircleMask; 
+            set
+            {
+                if (m_CircleMask == value)
+                    return;
+
+                m_CircleMask = value;
                 SetMaterialDirty();
             }
         }
@@ -91,12 +111,35 @@ namespace ExtendUI
                 case Type.Simple when !useSpriteMesh && activeSprite != null && m_Mirror != Mirror.None:
                     GenerateSimpleSprite(vh);
                     break;
+                case Type.Simple when !useSpriteMesh && activeSprite != null && m_CircleMask:
+                    CircleMaskSprite(vh);
+                    break;
                 default:
 #if UNITY_EDITOR && EXTEND_UI_DEBUG
                     print("Base OnPopulateMesh");
 #endif
                     base.OnPopulateMesh(vh);
                     break;
+            }
+            //UIVertex vert = new UIVertex();
+            //for (int i = 0; i < vh.currentVertCount; i++)
+            //{
+            //    vh.PopulateUIVertex(ref vert, i);
+            //    vert.uv1.x = (i >> 1);
+            //    vert.uv1.y = ((i >> 1) ^ (i & 1));
+            //    vert.uv2.x = m_Grey ? 1 : 0;
+            //    vert.uv2.y = m_CircleMask ? 1 : 0;
+            //    vh.SetUIVertex(vert, i);
+            //}
+            //if (m_GreyMaterial && (m_CircleMask || m_Grey))
+            //{
+            //    var uv = overrideSprite != null ? DataUtility.GetOuterUV(overrideSprite) : Vector4.zero;
+            //    m_GreyMaterial.SetVector("_UvRect", uv);
+            //    m_GreyMaterial.SetFloat("_ExtandUI", 1);
+            //}
+            if (type == Type.Filled)
+            {
+                FillHandle();
             }
         }
 
@@ -162,14 +205,91 @@ namespace ExtendUI
             }
         }
 
-#if UNITY_EDITOR
-        protected override void OnValidate()
+        private void CircleMaskSprite(VertexHelper vh)
         {
-            material = m_Grey ? GreyMaterial : null;
-            if (type != Type.Simple || useSpriteMesh)
-                m_Mirror = Mirror.None;
-            base.OnValidate();
+            vh.Clear();
+
+            float tw = rectTransform.rect.width;
+            float th = rectTransform.rect.height;
+            float outerRadius = 0.5f * tw;
+            float vertexCenterX = (0.5f - rectTransform.pivot.x) * tw;
+            float vertexCenterY = (0.5f - rectTransform.pivot.y) * th;
+
+            Vector4 uv = overrideSprite != null ? DataUtility.GetOuterUV(overrideSprite) : Vector4.zero;
+            float uvCenterX = (uv.x + uv.z) * 0.5f;
+            float uvCenterY = (uv.y + uv.w) * 0.5f;
+            float uvRadius = (uv.z - uv.x) * 0.5f;
+
+            float degreeDelta = (float)(2 * Mathf.PI / 30);
+            int curSegements = 30;
+
+            float curDegree = 0;
+            UIVertex uiVertex;
+            int verticeCount;
+            int triangleCount;
+            Vector2 curVertice;
+            Vector2 curUV;
+            curVertice = new Vector2(vertexCenterX, vertexCenterY);
+            verticeCount = curSegements + 1;
+            uiVertex = new UIVertex();
+            uiVertex.color = color;
+            uiVertex.position = curVertice;
+            uiVertex.uv0 = new Vector2(uvCenterX, uvCenterY);
+            vh.AddVert(uiVertex);
+
+            for (int i = 1; i < verticeCount; i++)
+            {
+                float cosA = Mathf.Cos(curDegree);
+                float sinA = Mathf.Sin(curDegree);
+                curVertice = new Vector2(cosA * outerRadius, sinA * outerRadius);
+                curUV = new Vector2(cosA * uvRadius, sinA * uvRadius);
+                curDegree += degreeDelta;
+
+                uiVertex = new UIVertex();
+                uiVertex.color = color;
+                uiVertex.position.x = vertexCenterX + curVertice.x;
+                uiVertex.position.y = vertexCenterY + curVertice.y;
+                uiVertex.uv0 = new Vector2(curUV.x + uvCenterX, curUV.y + uvCenterY);
+                vh.AddVert(uiVertex);
+            }
+            triangleCount = curSegements * 3;
+            for (int i = 0, vIdx = 1; i < triangleCount - 3; i += 3, vIdx++)
+            {
+                vh.AddTriangle(vIdx, 0, vIdx + 1);
+            }
+            vh.AddTriangle(verticeCount - 1, 0, 1);
         }
+
+        private void FillHandle()
+        {
+            if (m_HandleRect == null) return;
+            if(fillMethod == FillMethod.Horizontal || fillMethod == FillMethod.Vertical)
+            {
+                m_HandleRect.anchorMin = new Vector2(fillAmount, 0.0f);
+                m_HandleRect.anchorMax = new Vector2(fillAmount, 1.0f);        
+            }
+            else if (fillMethod == FillMethod.Radial90)
+            {
+                m_HandleRect.localEulerAngles = new Vector3(0, 0, -fillAmount * 90);
+            }
+            else if (fillMethod == FillMethod.Radial180)
+            {
+                m_HandleRect.localEulerAngles = new Vector3(0, 0, -fillAmount * 180);
+            }
+            else if(fillMethod == FillMethod.Radial360)
+            {
+                m_HandleRect.localEulerAngles = new Vector3(0, 0, -fillAmount * 360);
+            }
+        }
+
+#if UNITY_EDITOR
+        //protected override void OnValidate()
+        //{
+        //    material = m_Grey ? GreyMaterial : null;
+        //    if (type != Type.Simple || useSpriteMesh)
+        //        m_Mirror = Mirror.None;
+        //    base.OnValidate();
+        //}
 #endif
         // TODO 
         // public void Localize(Sprite localSprite)

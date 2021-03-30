@@ -6,7 +6,7 @@ namespace ExtendUI.SymbolText
     public class SymbolTextCfg : ScriptableObject
     {
         static Dictionary<string, Font>    Fonts;    // 当前所有的字库
-        static Dictionary<string, Sprite>  Sprites;  // 当前所有的精灵
+        static Dictionary<string, ISprite>  Sprites;  // 当前所有的精灵
         static Dictionary<string, Cartoon> Cartoons; // 当前所有的动画
 
         //[SerializeField]
@@ -32,14 +32,14 @@ namespace ExtendUI.SymbolText
             }
 
             if (Sprites == null)
-                Sprites = new Dictionary<string, Sprite>();
+                Sprites = new Dictionary<string, ISprite>();
             else
                 Sprites.Clear();
 
             if (sprites != null)
             {
                 for (int i = 0; i < sprites.Length; ++i)
-                    Sprites.Add(sprites[i].name, sprites[i]);
+                    Sprites.Add(sprites[i].name, new DSprite(sprites[i]));
             }
 
             if (Cartoons == null)
@@ -71,12 +71,12 @@ namespace ExtendUI.SymbolText
             return null;
         }
 
-        public static Sprite GetSprite(string name)
+        public static ISprite GetSprite(string name)
         {
             if (Sprites == null)
                 Init();
 
-            Sprite sprite;
+            ISprite sprite;
             if (Sprites.TryGetValue(name, out sprite))
                 return sprite;
 

@@ -27,44 +27,32 @@ namespace ExtendUI.SymbolText
             OnFuns['#'] = ParserOutputChar;
 
             OnFuns['['] = ParserFontColorS; // 自定义的颜色名
-            //OnFuns['b'] = ParserBlink; // 闪烁
+            OnFuns['b'] = ParserBlink; // 闪烁
             OnFuns['c'] = ParserFontColor; // 颜色
-            //OnFuns['d'] = ParserFontStyle; // 字体风格
-            //OnFuns['e'] = ParserStrickout; // 删除线
-            //OnFuns['m'] = ParserDynStrickout; // 动态删除线
+            OnFuns['d'] = ParserFontStyle; // 字体风格
+            OnFuns['e'] = ParserStrickout; // 删除线
+            OnFuns['m'] = ParserDynStrickout; // 动态删除线
 
-            //OnFuns['f'] = ParserFont; // 换字体
+            OnFuns['f'] = ParserFont; // 换字体
             OnFuns['n'] = ParserRestoreColor; // 恢复初始颜色
-            //OnFuns['g'] = ParserRestore; // 所有设置恢复默认
-            //OnFuns['r'] = ParserNewLine; // 换行
+            OnFuns['g'] = ParserRestore; // 所有设置恢复默认
+            OnFuns['r'] = ParserNewLine; // 换行
             OnFuns['u'] = ParserUnderLine; // 下划线
-            //OnFuns['t'] = ParserDynUnderline; // 动态下划线
-            //OnFuns['l'] = ParserDynSpeed; // 动态线速度
+            OnFuns['t'] = ParserDynUnderline; // 动态下划线
+            OnFuns['l'] = ParserDynSpeed; // 动态线速度
 
             OnFuns['h'] = ParserHyperlink; // 超链接
 
-            //OnFuns['s'] = ParserFontSize; // 字体大小
-            //OnFuns['x'] = ParserXYZ; // xyz的偏移
-            //OnFuns['y'] = ParserXYZ;
-            //OnFuns['z'] = ParserXYZ;
+            OnFuns['s'] = ParserFontSize; // 字体大小
+            OnFuns['x'] = ParserXYZ; // xyz的偏移
+            OnFuns['y'] = ParserXYZ;
+            OnFuns['z'] = ParserXYZ;
 
-            //OnFuns['w'] = ParserFormatting; // 对齐格式
+            OnFuns['w'] = ParserFormatting; // 对齐格式
 
-            //OnFuns['a'] = ParserLineAlignment; // 行对齐
+            OnFuns['a'] = ParserLineAlignment; // 行对齐
 
-            // #后面接数字，最多三位数字，为动画的名称
-            OnFuns['0'] = ParserCartoon;
-            OnFuns['1'] = ParserCartoon;
-            OnFuns['2'] = ParserCartoon;
-            OnFuns['3'] = ParserCartoon;
-            OnFuns['4'] = ParserCartoon;
-            OnFuns['5'] = ParserCartoon;
-            OnFuns['6'] = ParserCartoon;
-            OnFuns['7'] = ParserCartoon;
-            OnFuns['8'] = ParserCartoon;
-            OnFuns['9'] = ParserCartoon;
-
-            //OnFuns['&'] = ParserNextLineX;
+            OnFuns['&'] = ParserNextLineX;
         }
 
         void ParserNextLineX(string text)
@@ -80,25 +68,29 @@ namespace ExtendUI.SymbolText
             currentConfig.nextLineX = linex;
         }
 
-        void ParserCartoon(string text)
-        {
-            Cartoon cartoon = null;
-            int currentPos = d_curPos - 1;
-            for (int i = 3; i >= 1; --i)
-            {
-                int size = -1;
-                if (ParserInt(ref currentPos, text, ref size, i))
-                {
-                    cartoon = Tools.GetCartoon(size.ToString());
-                    if (cartoon != null)
-                        break;
-                }
+        public static int max_cartoon_length = 5;
 
-                currentPos = d_curPos - 1;
+        // #后面接5个字符，为动画的名称
+        bool ParserCartoon(string text)
+        {
+            Cartoon cartoon = null; 
+            int currentPos = d_curPos;
+            for (int i = max_cartoon_length; i >= 1; --i)
+            {
+                if (currentPos + i > text.Length)
+                    continue;
+
+                string name = text.Substring(currentPos, i);
+                cartoon = Tools.GetCartoon(name);
+                if (cartoon != null)
+                {
+                    currentPos += i;
+                    break;
+                }
             }
 
             if (cartoon == null)
-                return;
+                return false;
 
             d_curPos = currentPos;
             save(false);
@@ -111,6 +103,8 @@ namespace ExtendUI.SymbolText
             // 表情不变色
             cn.d_color = Color.white;
             d_nodeList.Add(cn);
+
+            return true;
         }
 
         void ParserDynSpeed(string text)

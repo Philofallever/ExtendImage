@@ -11,6 +11,7 @@ public class EditCustomFontWindow : EditorWindow
     private int        num = 10;
     private Vector2Int size;
     private string     fntFilePath;
+    private TextAsset   packCfg;
 
     private void OnGUI()
     {
@@ -34,6 +35,11 @@ public class EditCustomFontWindow : EditorWindow
         num = EditorGUILayout.IntField("数目", num);
 
         GUILayout.BeginHorizontal();
+        GUILayout.Label("字体配置：");
+        packCfg = (TextAsset)EditorGUILayout.ObjectField(packCfg, typeof(TextAsset), true);
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
         size = EditorGUILayout.Vector2IntField("size", size);
 
         GUILayout.EndHorizontal();
@@ -51,6 +57,11 @@ public class EditCustomFontWindow : EditorWindow
         var path    = AssetDatabase.GetAssetPath(font);
         var dir     = Path.GetDirectoryName(path);
         var matPath = Path.Combine(dir,Path.GetFileNameWithoutExtension(path) +".mat");
+        List<object> cfgList = null;
+        if (packCfg != null)
+        {
+            cfgList = MiniJSON.Json.Deserialize(packCfg.text) as List<object>;
+        }
 
         var mat = AssetDatabase.LoadAssetAtPath<Material>(matPath);
         if (!mat)
@@ -75,9 +86,11 @@ public class EditCustomFontWindow : EditorWindow
 
             charInfo.vert.x      = 0;
             charInfo.vert.y      = tex.height/2;
-            charInfo.vert.width  = eachWidth;
+            charInfo.vert.width  = eachWidth; 
             charInfo.vert.height = -tex.height;
-            charInfo.advance = 1;
+            charInfo.advance = (int)eachWidth;
+            int index = 0;
+            if (cfgList != null && cfgList.Count > i && int.TryParse(cfgList[i].ToString(), out index)) charInfo.index = index;
             list.Add(charInfo);
         }
 

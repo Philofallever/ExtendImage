@@ -4,6 +4,19 @@ using System.Collections.Generic;
 
 namespace ExtendUI.SymbolText
 {
+    public interface ISprite
+    {
+        int width { get; }
+        int height { get; }
+        
+        void AddRef();
+ 
+        void SubRef();
+
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
+        Sprite Get();
+    }
+
     static public partial class Tools
     {
         public const int s_dyn_default_speed = 320;
@@ -17,7 +30,7 @@ namespace ExtendUI.SymbolText
             get { return s_VertexHelper; }
         }
 
-        // ×óÏÂ½Ç(YÖá³¯ÏÂ)×ø±êÏµ×ª»»Îª×óÉÏ½Ç(YÖá³¯ÉÏ)×ø±êÏµ
+        // ï¿½ï¿½ï¿½Â½ï¿½(Yï¿½á³¯ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½Ïµ×ªï¿½ï¿½Îªï¿½ï¿½ï¿½Ï½ï¿½(Yï¿½á³¯ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½Ïµ
         public static void LB2LT(ref Vector2 pos, float height)
         {
             pos.y = height - pos.y;
@@ -49,17 +62,16 @@ namespace ExtendUI.SymbolText
             return DefaultFont;
         }
 
-        // µÃµ½¾«ÁéµÄ½Ó¿Ú
-        public static System.Func<string, Sprite> s_get_sprite = null;
+        // ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Ä½Ó¿ï¿½
+        public static System.Func<string, ISprite> s_get_sprite { set; private get;  }
 
-        // µÃµ½×ÖÌåµÄ½Ó¿Ú
+        // ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Ä½Ó¿ï¿½
         public static System.Func<string, Font> s_get_font = null;
 
-        static public Sprite GetSprite(string name)
+        static public ISprite GetSprite(string name)
         {
             if (s_get_sprite == null)
                 return SymbolTextCfg.GetSprite(name);
-
             return s_get_sprite(name);
         }
 
@@ -88,7 +100,7 @@ namespace ExtendUI.SymbolText
 
         public static void AddLine(VertexHelper vh, Vector2 leftPos, Vector2 uv, float width, float height, Color color)
         {
-            // ÓÐÏÂ»®Ïß
+            // ï¿½ï¿½ï¿½Â»ï¿½ï¿½ï¿½
             Vector2 leftTop = new Vector2(leftPos.x, leftPos.y);
 
             int count = vh.currentVertCount;
@@ -182,17 +194,25 @@ namespace ExtendUI.SymbolText
 
         static public bool ParseColor(string text, int offset, out Color color)
         {
-            color = Color.white;
-            int l = text.Length - offset;
-            if (l >= 8)
+            try
             {
-                color = ParseColor32(text, offset);
-                return true;
+                color = Color.white;
+                int l = text.Length - offset;
+                if (l >= 8)
+                {
+                    color = ParseColor32(text, offset);
+                    return true;
+                }
+                else if (l >= 6)
+                {
+                    color = ParseColor24(text, offset);
+                    return true;
+                }
             }
-            else if (l >= 6)
+            catch (System.Exception ex)
             {
-                color = ParseColor24(text, offset);
-                return true;
+                color = Color.white;
+                Debug.LogException(ex);
             }
 
             return false;
@@ -273,7 +293,7 @@ namespace ExtendUI.SymbolText
             }
             else
             {
-                // c,ºóÃæ½ÓµÄ×Ö·û¶¨ÒåÎª×ÖÌåµÄÑÕÉ«£¬Èç¹ûºóÃæ×Ö·û²»ÊÇÊý×Ö£¬ÔòÑÕÉ«»Ö¸´ÎªÄ¬ÈÏµÄÑÕÉ«,×î¶àÁù¸öÊý×Ö
+                // c,ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½Ö¸ï¿½ÎªÄ¬ï¿½Ïµï¿½ï¿½ï¿½É«,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 int start_color = ++startpos;
                 int color_lenght = 0;
                 int lenght = text.Length;

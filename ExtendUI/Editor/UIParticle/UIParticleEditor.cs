@@ -152,8 +152,8 @@ namespace Coffee.UIExtensions
 			_spScale = serializedObject.FindProperty ("m_Scale");
 			_spIgnoreParent = serializedObject.FindProperty ("m_IgnoreParent");
 			_spAnimatableProperties = serializedObject.FindProperty ("m_AnimatableProperties");
-
-			if (!s_Material)
+            _spDontManage = serializedObject.FindProperty("dontManage");
+            if (!s_Material)
 			{
 				s_Material = Call<Material> (typeof (Material), "GetDefaultMaterial");
 			}
@@ -197,10 +197,11 @@ namespace Coffee.UIExtensions
 
 			EditorGUI.BeginDisabledGroup (!current.isRoot);
 			EditorGUILayout.PropertyField (_spScale);
-			EditorGUI.EndDisabledGroup ();
+            EditorGUI.EndDisabledGroup ();
+            EditorGUILayout.PropertyField(_spDontManage);
 
-			// AnimatableProperties
-			AnimatedPropertiesEditor.DrawAnimatableProperties (_spAnimatableProperties, current.material);
+            // AnimatableProperties
+            AnimatedPropertiesEditor.DrawAnimatableProperties (_spAnimatableProperties, current.material);
 
 			current.GetComponentsInChildren<ParticleSystem> (true, s_ParticleSystems);
 			if (s_ParticleSystems.Any (x => x.GetComponent<UIParticle> () == null))
@@ -250,7 +251,8 @@ namespace Coffee.UIExtensions
 		SerializedProperty _spScale;
 		SerializedProperty _spIgnoreParent;
 		SerializedProperty _spAnimatableProperties;
-		UIParticle [] _particles;
+        SerializedProperty _spDontManage;
+        UIParticle [] _particles;
 		ArcHandle _arcHandle = new ArcHandle ();
 		BoxBoundsHandle _boxBoundsHandle = new BoxBoundsHandle ();
 		SphereBoundsHandle _sphereBoundsHandle = new SphereBoundsHandle ();
